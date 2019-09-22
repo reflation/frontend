@@ -1,5 +1,7 @@
 # 드림 플러스
 
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow?style=flat-square)](https://www.conventionalcommits.org/)
+
 ## 개요
 
 제주대학교 학사관리 웹 서비스 [하영드리미](https://dreamy.jejunu.ac.kr)의 UX를 개선하는 브라우저 확장 앱을 설계하고 있습니다.
