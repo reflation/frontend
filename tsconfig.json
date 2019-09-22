@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "typeRoots": ["node_modules/@types"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "files": ["backend/mock.ts"],
+  "include": ["types/*.d.ts"],
+  "exclude": ["node_modules"],
+  "types": ["node", "react", "react-dom"]
+}
