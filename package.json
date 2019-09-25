@@ -5,11 +5,13 @@
   "author": "x86chi",
   "license": "MIT",
   "scripts": {
-    "backend": "yarn port:4000 yarn sucrase-node backend/mock.ts",
-    "port:4000": "cross-env PORT=4000",
-    "frontend:dev": "cross-env BROWSER=none react-scripts start",
-    "fontend:dev:new": "react-scripts start",
-    "frontend:build": "react-scripts build",
+    "backend": "yarn env:port yarn sucrase-node backend/mock.ts",
+    "frontend:developing": " yarn env:browser yarn frontend:develop",
+    "frontend:develop": "yarn env:sass react-scripts start",
+    "frontend:build": "yarn env:sass react-scripts build",
+    "env:browser": "cross-env BROWSER=none",
+    "env:sass": "cross-env SASS_PATH=node_modules:src/styles",
+    "env:port": "cross-env PORT=4000",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -18,18 +20,19 @@
     "axios": "^0.19.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "styled-components": "^4.3.2",
     "react-scripts": "3.1.2",
-    "typescript": "3.6.3",
-    "typeface-nanum-square-round-subset": "^1.0.1"
+    "styled-components": "^4.4.0",
+    "typeface-nanum-square-round-subset": "^1.0.1",
+    "typescript": "3.6.3"
   },
   "devDependencies": {
-    "@types/jest": "24.0.18",
     "@commitlint/cli": "^8.2.0",
     "@types/hapi": "^18.0.2",
+    "@types/jest": "24.0.18",
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
+    "@types/styled-components": "^4.1.19",
     "cross-env": "^6.0.0",
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
@@ -37,6 +40,7 @@
     "eslint-plugin-react": "^7.14.3",
     "husky": ">=1",
     "lint-staged": ">=8",
+    "node-sass": "^4.12.0",
     "sucrase": "^3.10.1"
   },
   "husky": {
