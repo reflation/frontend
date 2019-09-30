@@ -8,6 +8,7 @@ export const darken_lite = 'rgba(0, 0, 0, 0.09)'
 export const darken_ultra = 'rgba(0, 0, 0, 0.03)'
 export const background = '#f7f7f7'
 
+export const mainBoxShadow = 'rgba(21, 19, 19, 0.07)'
 
 export const valid = {
   outside: 'rgba(186, 231, 255, 0.65)',

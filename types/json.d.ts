@@ -1,19 +1,24 @@
+export type grade_item =
+  | 'A'
+  | 'A+'
+  | 'A0'
+  | 'A-'
+  | 'B+'
+  | 'B0'
+  | 'B-'
+  | 'C+'
+  | 'C0'
+  | 'C-'
+  | 'D+'
+  | 'D0'
+  | 'D-'
+  | 'F'
+  | 'S'
+
 interface grade {
   credit: 0 | 2 | 3 | 4
-  dg_gb:
-    | 'A+'
-    | 'A0'
-    | 'A-'
-    | 'B+'
-    | 'B0'
-    | 'B-'
-    | 'C+'
-    | 'C0'
-    | 'C-'
-    | 'D+'
-    | 'D0'
-    | 'D-'
-    | 'F'
+  dg_gb: grade_item
+
   isu_cd:
     | 'A.기초교양'
     | 'B.전공탐색'
@@ -74,7 +79,7 @@ interface total_grade_summery extends parent_grade_props {
   univ_cd: tUnivs
 }
 
-declare module '*/doList/*/*.json' {
+declare module '.models/doList/*/*.json' {
   export const GRID_DATA: grade[]
   export const BOTTOM_DATA: current_searched_grade_summary
   export const TOP_DATA: total_grade_summery
@@ -107,7 +112,18 @@ interface personal_info {
   univ_cd: number
 }
 
-declare module '*/doSearch.json' {
+interface commonProp {
+  TOP_DATA: total_grade_summery
+}
+
+export interface doFetch extends commonProp {
+  TERMNOW_DATA?: list_item[]
+  PERSON_DATA?: personal_info
+  GRID_DATA?: grade[]
+  BOTTOM_DATA?: current_searched_grade_summary
+}
+
+declare module './models/doSearch.json' {
   export const TERMNOW_DATA: list_item[]
   export const PERSON_DATA: personal_info
   export const TOP_DATA: total_grade_summery
