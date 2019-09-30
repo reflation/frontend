@@ -15,6 +15,5 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "files": ["backend/mock.ts"],
   "include": ["src", "types/*.d.ts"]
 }
