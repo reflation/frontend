@@ -1,3 +1,13 @@
+import {
+  tStatus,
+  tSemester_num,
+  tSemester,
+  tRow_count,
+  tYear,
+  tBoolInt,
+  tUnivs,
+} from './common'
+
 export type grade_item =
   | 'A'
   | 'A+'
@@ -112,11 +122,8 @@ interface personal_info {
   univ_cd: number
 }
 
-interface commonProp {
+export interface doFetch {
   TOP_DATA: total_grade_summery
-}
-
-export interface doFetch extends commonProp {
   TERMNOW_DATA?: list_item[]
   PERSON_DATA?: personal_info
   GRID_DATA?: grade[]

@@ -1,13 +1,12 @@
 import hapi from 'hapi'
 
-type tSemester = '1학기' | '하기계절' | '2학기' | '동기계절'
-type tSemester_num = 10 | 11 | 20 | 21
-type tRow_count = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
-type tStatus = '재학' | '휴힉'
-type tYear = number
-type tBoolInt = 0 | 1
-
-type tUnivs =
+export type tSemester = '1학기' | '하기계절' | '2학기' | '동기계절'
+export type tSemester_num = 10 | 11 | 20 | 21
+export type tRow_count = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10
+export type tStatus = '재학' | '휴힉'
+export type tYear = number
+export type tBoolInt = 0 | 1
+export type tUnivs =
   | '인문대학'
   | '사회과학대학'
   | '경상대학'
