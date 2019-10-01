@@ -9,7 +9,7 @@ import { Skeleton } from './Skleton'
 import { FetchPoint } from '../api'
 
 import { doListProps } from '../../types/common.d'
-import { grade_item, grade } from '../../types/json.d'
+import { grade_item } from '../../types/json.d'
 
 import countBy from 'ramda/src/countBy'
 import flatten from 'ramda/src/flatten'
@@ -86,46 +86,72 @@ const JustifySelf = styled.div`
   justify-self: center;
 `
 
+const student_no = 2018103277
+const group_gb = 20
+const del_gb = 'AND SJ_DEL_GB IS NULL'
+
+const semesterEnum = {
+  10: '1',
+  11: '여름',
+  20: '2',
+  21: '겨울',
+}
+
 const Main = () => {
   const [totalAverage, setTotalAvarage] = useState<NumberType>(null)
   const [creadit, setCreadit] = useState<NumberType>(null)
   const [gradesCount, setGradeCount] = useState<GradeCountType>(null)
   const [eachAverage, setEachAverage] = useState<NumberTypes>(null)
+  const [semesters, setSemesters] = useState<string[] | null>(null)
+  const [name, setName] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
       const {
         TOP_DATA: { avg_mark, apply_credit },
         TERMNOW_DATA,
+        PERSON_DATA,
       } = await FetchPoint({
         mode: 'doSearch',
-        student_no: 2018103277,
+        student_no,
       })
 
       setTotalAvarage(avg_mark)
       setCreadit(apply_credit)
 
-      if (!TERMNOW_DATA) return
+      if (!TERMNOW_DATA || !PERSON_DATA) return
 
-      setEachAverage(
-        TERMNOW_DATA.filter(i => i.avg_mark !== 0).map(i => i.avg_mark)
+      const FILT_TERM_DATA = TERMNOW_DATA.filter(i => i.avg_mark !== 0)
+
+      setName(PERSON_DATA.nm)
+
+      setEachAverage(FILT_TERM_DATA.map(i => i.avg_mark))
+
+      setSemesters(
+        FILT_TERM_DATA.map(
+          // HACK: term_nm return undefind after parse from server
+          ({ year, term_gb }) => `${year}년 ${semesterEnum[term_gb]}학기`
+        )
       )
 
-      const ListProp = TERMNOW_DATA.map<doListProps>(i => ({
-        mode: 'doList',
-        year: i.year,
-        term_gb: i.term_gb,
-        group_gb: 20,
-        student_no: 20181023277,
-        outside_seq: i.outside_seq,
-        del_gb: 'AND SJ_DEL_GB IS NULL',
-      }))
+      const ListProp = TERMNOW_DATA.map<doListProps>(
+        ({ year, term_gb, outside_seq }) => ({
+          mode: 'doList',
+          year,
+          term_gb,
+          group_gb,
+          student_no,
+          outside_seq,
+          del_gb,
+        })
+      )
+
       const fetched = await Promise.all(ListProp.map(i => FetchPoint(i)))
 
       const counted = countBy(toUpper)(
         flatten(
           fetched.map(i =>
-            i.GRID_DATA!.filter((g: grade) => g.dg_gb !== 'S').map(g => g.dg_gb)
+            i.GRID_DATA!.filter(({ dg_gb }) => dg_gb !== 'S').map(g => g.dg_gb)
           )
         )
       )
@@ -143,7 +169,7 @@ const Main = () => {
 
   const series = [
     {
-      name: '김무훈',
+      name,
       data: eachAverage,
     },
   ]
@@ -165,7 +191,7 @@ const Main = () => {
       <JustifySelf>
         <Regular>학기별 학점 현황</Regular>
         {!eachAverage && <SkletonLineChart />}
-        {eachAverage && <LineChart series={series} />}
+        {eachAverage && <LineChart categories={semesters} series={series} />}
       </JustifySelf>
     </RootBox>
   )

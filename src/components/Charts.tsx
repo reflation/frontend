@@ -21,7 +21,7 @@ interface PieProp {
 }
 
 interface LineChartProps {
-  option?: object
+  categories: string[] | null
   series: any[]
 }
 
@@ -86,7 +86,7 @@ export const PieChart = ({ data }: PieProp) => (
   />
 )
 
-export const LineChart = ({ option, series }: LineChartProps) => {
+export const LineChart = ({ categories, series }: LineChartProps) => {
   const defaultOption = {
     yaxis: {
       min: 2.0,
@@ -112,8 +112,7 @@ export const LineChart = ({ option, series }: LineChartProps) => {
       curve: 'straight',
     },
     xaxis: {
-      // TODD: Dynamic insert
-      categories: ['1학년 1학기', '1학년 2학기', '2학년 1학기'],
+      categories,
     },
     plotOptions: {
       dataLabels: {
@@ -126,7 +125,7 @@ export const LineChart = ({ option, series }: LineChartProps) => {
   return (
     <div id="chart">
       <ApexChart
-        options={option ? option : defaultOption}
+        options={defaultOption}
         series={series}
         type="line"
         height="150px"
