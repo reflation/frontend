@@ -1,6 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
-  "extends": ["react-app", "eslint-plugin-codeceptjs"],
+  "extends": ["react-app", "plugin:codeceptjs/recommended"],
   "plugins": ["react", "@typescript-eslint/tslint"],
   "env": {
     "browser": true,
@@ -21,6 +21,7 @@
         "lintFile": "./tslint.json"
       }
     ],
-    "eqeqeq": 2
+    "eqeqeq": 2,
+    "codeceptjs/no-actor-in-scenario": 2
   }
 }
