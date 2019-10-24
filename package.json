@@ -1,0 +1,71 @@
+{
+  "name": "dream-plus",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/jest": "24.0.19",
+    "@types/node": "12.11.6",
+    "@types/react": "16.9.9",
+    "@types/react-dom": "16.9.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-scripts": "3.2.0",
+    "typescript": "3.6.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint": "./node_modules/.bin/eslint './src/**/*.{ts,tsx}'",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "@types/dotenv": "^6.1.1",
+    "@typescript-eslint/eslint-plugin-tslint": "^2.5.0",
+    "@typescript-eslint/parser": "^2.5.0",
+    "eslint": "^6.5.1",
+    "eslint-config-react-app": "^5.0.2",
+    "eslint-plugin-codeceptjs": "^1.1.0",
+    "husky": ">=1",
+    "lint-staged": ">=8",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "tslint-clean-code": "^0.2.10",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
