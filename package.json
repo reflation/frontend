@@ -19,6 +19,7 @@
     "developing": " yarn env:browser yarn develop",
     "develop": "react-scripts start",
     "env:browser": "cross-env BROWSER=none",
+    "start": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
     "test:unit": "react-scripts test",
     "test:e2e": "TS_NODE_PROJECT='./src/specs/tsconfig.json' codeceptjs run",
