@@ -1,15 +1,22 @@
-import React, { FormEvent, useState, Fragment } from 'react'
+import React, { useState, Fragment } from 'react'
 
 import { Input } from '../view/Input'
 import { submitID } from '../control'
+import { TypeForm } from '../@types/events'
+
+interface FormElements extends HTMLFormElement {
+  mailid: HTMLInputElement
+}
+
+interface FormTarget extends TypeForm {
+  target: FormElements
+}
 
 const App: React.FC = () => {
   const [flag, setFlag] = useState<boolean>()
-  const onSubmit = async (event: FormEvent) => {
+  const onSubmit = async (event: FormTarget) => {
     event.preventDefault()
-    // @ts-ignore
-    const { value }: { value: string } = event.target[0]
-    setFlag(await submitID(value))
+    setFlag(await submitID(event.target.mailid.value))
   }
   return (
     <Fragment>

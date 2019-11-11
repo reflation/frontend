@@ -1,16 +1,17 @@
-import React, { useState, FormEvent, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 
 import { fetchAndSet, isCodeFF } from '../control'
 import { Input } from '../view/Input'
 import { saveToken } from '../utils'
 import { Redirect } from 'react-router-dom'
+import { TypeForm } from '../@types/events'
 
 interface FormElements extends HTMLFormElement {
   student_no: HTMLInputElement
   student_pw: HTMLInputElement
 }
 
-interface FormTarget extends FormEvent<HTMLFormElement> {
+interface FormTarget extends TypeForm {
   target: FormElements
 }
 
@@ -34,7 +35,7 @@ const App = () => {
     <div id="form">
       <p>학번 및 비밀번호를 입력해주세요!</p>
       <form onSubmit={onSubmit}>
-        <Input name="student_no" type="username" />
+        <Input name="student_no" type="number" />
         <Input name="student_pw" type="password" />
         <button type="submit">Submit</button>
       </form>
