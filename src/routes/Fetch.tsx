@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react'
 
 import { fetchAndSet, isCodeFF } from '../control'
-import { Input } from '../view/Input'
+import { Input } from '../views/Input'
 import { saveToken } from '../utils'
 import { Redirect } from 'react-router-dom'
 import { TypeForm } from '../@types/events'

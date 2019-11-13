@@ -1,0 +1,19 @@
+@import 'reset';
+
+body {
+  font-family: NanumSquareRound;
+}
+
+::-moz-placeholder {
+  opacity: 1;
+}
+
+body {
+  background-color: #f7f7f7;
+  display: flex;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
