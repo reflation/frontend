@@ -21,7 +21,6 @@ const CIRCLE_WIDTH = { width: '170px' }
 
 export const DonutChart = ({ title, value, totalValue }: DonutProps) => {
   const isGPA = title === '평점'
-
   return (
     <MinimalChart
       data={[
@@ -55,8 +54,6 @@ export const DonutChart = ({ title, value, totalValue }: DonutProps) => {
       background={darken_lite}
       rounded
       animate
-      // TODO
-      // label={() => <span>{title}</span>}
       label
       labelPosition={0}
       labelStyle={{
@@ -73,45 +70,43 @@ type LineChartProps = {
   series: any[]
 }
 
-export const LineChart = ({ categories, series }: LineChartProps) => {
-  const defaultOption = {
-    yaxis: {
-      min: 2.0,
-      max: MAX_GPA,
-      labels: {
-        formatter: (v: number) => v.toPrecision(2),
-      },
-      tickAmount: 2,
+const lineOption = {
+  yaxis: {
+    min: 2.0,
+    max: MAX_GPA,
+    labels: {
+      formatter: (v: number) => v.toPrecision(2),
     },
-    chart: {
-      zoom: {
-        enabled: false,
-      },
-      toolbar: {
+    tickAmount: 2,
+  },
+  chart: {
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    curve: 'straight',
+  },
+  plotOptions: {
+    dataLabels: {
+      name: {
         show: false,
       },
     },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: 'straight',
-    },
-    xaxis: {
-      categories,
-    },
-    plotOptions: {
-      dataLabels: {
-        name: {
-          show: false,
-        },
-      },
-    },
-  }
+  },
+}
+
+export const LineChart = ({ categories, series }: LineChartProps) => {
   return (
     <div id="chart">
       <ApexChart
-        options={defaultOption}
+        options={{ ...lineOption, xaxis: { categories } }}
         series={series}
         type="line"
         height="150px"
@@ -120,28 +115,25 @@ export const LineChart = ({ categories, series }: LineChartProps) => {
   )
 }
 
-type PieChartProps = {
-  labels: string[]
-  series: number[]
-}
+// type PieChartProps = {
+//   labels: string[]
+//   series: number[]
+// }
 
-// export const PieChart = ({labels, series}: PieChartProps) => {
-//   const options = {
-//     labels,
-//     responsive: [
-//       {
-//         breakpoint: 480,
-//         options: {
-//           chart: {
-//             width: 200,
-//           },
-//           legend: {
-//             position: 'bottom',
-//           },
+// const pieOption = {
+//   responsive: [
+//     {
+//       breakpoint: 480,
+//       options: {
+//         chart: {
+//           width: 200,
+//         },
+//         legend: {
+//           position: 'bottom',
 //         },
 //       },
-//     ],
-//   }
-
-//   return <ApexChart {options, series} type="pie" width={CIRCLE_WIDTH} />
+//     },
+//   ],
 // }
+
+// export const PieChart = ({labels, series}: PieChartProps) => <ApexChart options={{...pieOption, labels}} {series} type="pie" width={CIRCLE_WIDTH} />
