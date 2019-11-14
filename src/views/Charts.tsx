@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { primary, darken_lite, black, darken_normal } from '../styles/colors'
 import MinimalChart from 'react-minimal-pie-chart'
 
