@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react'
 
-import { Input } from '../view/Input'
+import { Input } from '../views/Input'
 import { submitID } from '../control'
 import { TypeForm } from '../@types/events'
 

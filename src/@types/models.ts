@@ -20,6 +20,8 @@ export type TypeUser = {
   semesters: TypeSemester[]
 }
 
+export type TypeUserOmitMailid = Omit<TypeUser, 'mailid'>
+
 export enum enumSemester {
   '1학기' = 'FIRST',
   '하기계절' = 'SUMMER',

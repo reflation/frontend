@@ -1,42 +1,39 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import useAsyncEffect from 'use-async-effect'
 
-import { resData, isCodeFF } from '../control'
+import { loadContent, isCodeFF } from '../control'
 import { Redirect, Link } from 'react-router-dom'
-import { TypeUser } from '../@types/models'
+import { TypeUserOmitMailid } from '../@types/models'
+
+import Wrapper from '../views/Wrapper'
+
+const errorMessages = {
+  401: '서버에서 사용자 정보를 찾을 수 없어요 :/',
+  500: '500 오류 :/',
+}
 
 const App = () => {
   const [status, setStatus] = useState<number>()
-  const [userData, setUserData] = useState<TypeUser>()
-
-  useAsyncEffect(async () => {
-    const { status: resStatus, data } = await resData()
-    setStatus(resStatus)
-    setUserData(data)
-  }, [])
+  const [userData, setUserData] = useState<TypeUserOmitMailid>()
 
   const isCode = isCodeFF(status)
 
+  useAsyncEffect(async () => {
+    const { status: resStatus, data } = await loadContent()
+    setStatus(resStatus)
+    const { mailid, ...pick } = data
+    setUserData(pick)
+  }, [])
+
   const Go2Login = () => (
     <div id="error">
-      {isCode(401) && <p>서버에서 사용자 정보를 찾을 수 없어요 :/</p>}
-      {isCode(500) && <p>500 오류 :/</p>}
+      <p>{isCode(401) ? errorMessages[401] : errorMessages[500]}</p>
       <Link to="/login">다시 로그인하러 가기</Link>
     </div>
   )
-
-  if (isCode(undefined)) return <p id="loading">불러오는 중..</p>
-  return (
-    <Fragment>
-      {isCode(200) && (
-        <p>
-          <span id="result">캐싱 된 데이터:</span> {console.log(userData)}
-        </p>
-      )}
-      {isCode(204) && <Redirect to="/fetch" />}
-      {(isCode(401) || isCode(500)) && <Go2Login />}
-    </Fragment>
-  )
+  if (isCode(undefined) || isCode(200)) return <Wrapper {...userData} />
+  if (isCode(204)) return <Redirect to="/fetch" />
+  return <Go2Login />
 }
 
 export default App
