@@ -5,7 +5,7 @@ import MinimalChart from 'react-minimal-pie-chart'
 import ApexChart from 'react-apexcharts'
 import { MAX_GPA, TYPE_MAX_GPA, TYPE_REQUIRE_CREADIT } from '../varables'
 
-type DountProps =
+type DonutProps =
   | {
       title: '평점'
       value: number
@@ -19,7 +19,7 @@ type DountProps =
 
 const CIRCLE_WIDTH = { width: '170px' }
 
-export const DonutChart = ({ title, value, totalValue }: DountProps) => {
+export const DonutChart = ({ title, value, totalValue }: DonutProps) => {
   const isGPA = title === '평점'
 
   return (
