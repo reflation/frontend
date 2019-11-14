@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react'
 
-import { fetchAndSet, isCodeFF } from '../control'
+import { fetchConent, isCodeFF } from '../control'
 import { Input } from '../views/Input'
 import { saveToken } from '../utils'
 import { Redirect } from 'react-router-dom'
@@ -24,7 +24,7 @@ const App = () => {
   const onSubmit = async (event: FormTarget) => {
     event.preventDefault()
     setStatus(
-      await fetchAndSet({
+      await fetchConent({
         student_no: parseInt(event.target.student_no.value),
         student_pw: event.target.student_pw.value,
       })

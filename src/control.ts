@@ -12,7 +12,7 @@ export const submitID = async (mailid: string) => {
   }
 }
 
-export const resData = async (): Promise<TypeLoad> => {
+export const loadContent = async (): Promise<TypeLoad> => {
   const { status, data } = await loadData()
   return {
     status,
@@ -20,7 +20,7 @@ export const resData = async (): Promise<TypeLoad> => {
   }
 }
 
-export const fetchAndSet = async (data: TypeUserNoPw): Promise<number> => {
+export const fetchConent = async (data: TypeUserNoPw): Promise<number> => {
   const { status } = await fetchData(data)
   return status
 }

@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react'
 import useAsyncEffect from 'use-async-effect'
 
-import { resData, isCodeFF } from '../control'
+import { loadContent, isCodeFF } from '../control'
 import { Redirect, Link } from 'react-router-dom'
 import { TypeUserOmitMailid } from '../@types/models'
 
@@ -12,7 +12,7 @@ const App = () => {
   const [userData, setUserData] = useState<TypeUserOmitMailid>()
 
   useAsyncEffect(async () => {
-    const { status: resStatus, data } = await resData()
+    const { status: resStatus, data } = await loadContent()
     setStatus(resStatus)
     const { mailid, ...pick } = data
     setUserData(pick)
