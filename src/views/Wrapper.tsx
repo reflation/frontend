@@ -8,7 +8,8 @@ import { SkletonCircle, SkletonLineChart } from './Skleton'
 import { MAX_GPA, REQUIRE_CREADIT } from '../varables'
 import { UserOmitMailid } from '../@types/models'
 import { FlexBox } from '../styles'
-import { GradePointArray, GradePoint } from '../@types/dreamy'
+import { A2C, GradePoint } from '../@types/dreamy'
+import { count, sumArray } from '../utils'
 
 const RegularMarginLeft = styled(Regular)`
   margin-left: 18px;
@@ -43,10 +44,6 @@ enum Semester {
   'WINTER' = '겨울학기',
 }
 
-function count<T>(array: T[], itm: T) {
-  return array.filter(x => x === itm).length
-}
-
 const Wrapper = ({
   name,
   semesters,
@@ -67,7 +64,9 @@ const Wrapper = ({
     const flatGrades = semesters
       .map(semester => semester.subjects.map(subject => subject.grade))
       .flat()
-    setGradePer(GradePointArray.map(itm => count<GradePoint>(flatGrades, itm)))
+    const A2C_NUM = A2C.map(itm => count<GradePoint>(flatGrades, itm))
+
+    setGradePer([...A2C_NUM, flatGrades.length - sumArray(A2C_NUM)])
 
     const OmitOutside = semesters.filter(({ isOutside }) => !isOutside)
     setSeries([
@@ -103,7 +102,7 @@ const Wrapper = ({
           <SkletonCircle />
         )}
         {gradePer ? (
-          <PieChart labels={GradePointArray} series={gradePer} />
+          <PieChart labels={[...A2C, 'D 이하']} series={gradePer} />
         ) : (
           <SkletonCircle />
         )}

@@ -34,7 +34,7 @@ export type GradePoint =
   | 'D-'
   | 'F'
 
-export const GradePointArray: GradePoint[] = [
+export const A2C: Exclude<GradePoint, 'D+' | 'D0' | 'D-' | 'F'>[] = [
   'A+',
   'A0',
   'A-',
@@ -44,10 +44,6 @@ export const GradePointArray: GradePoint[] = [
   'C+',
   'C0',
   'C-',
-  'D+',
-  'D0',
-  'D-',
-  'F',
 ]
 
 export enum GradeNum {
