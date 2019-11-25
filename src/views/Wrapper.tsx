@@ -6,7 +6,7 @@ import { DonutChart, LineChart } from './Charts'
 import { Regular } from './Text'
 import { SkletonCircle, SkletonLineChart } from './Skleton'
 import { MAX_GPA, REQUIRE_CREADIT } from '../varables'
-import { TypeUserOmitMailid } from '../@types/models'
+import { UserOmitMailid } from '../@types/models'
 import { FlexBox } from '../styles'
 
 const RegularMarginLeft = styled(Regular)`
@@ -46,7 +46,7 @@ const Wrapper = ({
   name,
   semesters,
   averagePoint,
-}: Partial<TypeUserOmitMailid>) => {
+}: Partial<UserOmitMailid>) => {
   const [creadit, setCreadit] = useState<number>()
   const [semesterSeries, setSeries] = useState<any[]>()
   const [sememsterIndex, setIndex] = useState<string[]>()

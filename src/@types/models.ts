@@ -1,11 +1,11 @@
-export type TypeLoginRes = { mailid: string }
+export type LoginRes = { mailid: string }
 
-export interface TypeUserNoPw {
+export interface UserNoPw {
   student_no: number
   student_pw: string
 }
 
-export type TypeSemester = {
+export type Semester = {
   averagePoint: number // Float
   totalCredit: number
   isOutside: boolean
@@ -13,14 +13,14 @@ export type TypeSemester = {
   year: number
 }
 
-export type TypeUser = {
+export type User = {
   name: string
   mailid: string
   averagePoint: number // Float
-  semesters: TypeSemester[]
+  semesters: Semester[]
 }
 
-export type TypeUserOmitMailid = Omit<TypeUser, 'mailid'>
+export type UserOmitMailid = Omit<User, 'mailid'>
 
 export enum enumSemester {
   '1학기' = 'FIRST',

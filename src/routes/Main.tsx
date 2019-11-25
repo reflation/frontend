@@ -3,7 +3,7 @@ import useAsyncEffect from 'use-async-effect'
 
 import { loadContent, isCodeFF } from '../control'
 import { Redirect, Link } from 'react-router-dom'
-import { TypeUserOmitMailid } from '../@types/models'
+import { UserOmitMailid } from '../@types/models'
 
 import Wrapper from '../views/Wrapper'
 
@@ -14,7 +14,7 @@ const errorMessages = {
 
 const App = () => {
   const [status, setStatus] = useState<number>()
-  const [userData, setUserData] = useState<TypeUserOmitMailid>()
+  const [userData, setUserData] = useState<UserOmitMailid>()
 
   const isCode = isCodeFF(status)
 
