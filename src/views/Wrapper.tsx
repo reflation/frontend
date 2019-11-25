@@ -6,7 +6,7 @@ import { DonutChart, LineChart } from './Charts'
 import { Regular } from './Text'
 import { SkletonCircle, SkletonLineChart } from './Skleton'
 import { MAX_GPA, REQUIRE_CREADIT } from '../varables'
-import { TypeUserOmitMailid } from '../@types/models'
+import { UserOmitMailid } from '../@types/models'
 import { FlexBox } from '../styles'
 
 const RegularMarginLeft = styled(Regular)`
@@ -35,7 +35,7 @@ const FlexBoxColumn = styled(FlexBox)`
   flex-direction: column;
 `
 
-enum enumSemester {
+enum Semester {
   'FIRST' = '1학기',
   'SUMMER' = '여름학기',
   'SECOND' = '2학기',
@@ -46,7 +46,7 @@ const Wrapper = ({
   name,
   semesters,
   averagePoint,
-}: Partial<TypeUserOmitMailid>) => {
+}: Partial<UserOmitMailid>) => {
   const [creadit, setCreadit] = useState<number>()
   const [semesterSeries, setSeries] = useState<any[]>()
   const [sememsterIndex, setIndex] = useState<string[]>()
@@ -66,9 +66,7 @@ const Wrapper = ({
       },
     ])
     setIndex(
-      OmitOutside.map(
-        ({ year, semester }) => `${year}년 ${enumSemester[semester]}`
-      )
+      OmitOutside.map(({ year, semester }) => `${year}년 ${Semester[semester]}`)
     )
   }, [semesters, name])
 

@@ -1,7 +1,7 @@
 import { sendID, loadData } from './api'
 import { TypeLoad } from './@types/state'
 import { fetchData } from './api'
-import { TypeUserNoPw } from './@types/models'
+import { UserNoPw } from './@types/models'
 
 export const submitID = async (mailid: string) => {
   try {
@@ -20,7 +20,7 @@ export const loadContent = async (): Promise<TypeLoad> => {
   }
 }
 
-export const fetchConent = async (data: TypeUserNoPw): Promise<number> => {
+export const fetchConent = async (data: UserNoPw): Promise<number> => {
   const { status } = await fetchData(data)
   return status
 }

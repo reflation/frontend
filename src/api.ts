@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { TypeUser, TypeUserNoPw } from './@types/models'
+import { User, UserNoPw } from './@types/models'
 import { getToken } from './utils'
 
 const baseURL = 'http://localhost:4000/'
@@ -19,16 +19,14 @@ export const sendID = (
     }
   )
 
-export const fetchData = (
-  data: TypeUserNoPw
-): Promise<AxiosResponse<TypeUser>> =>
+export const fetchData = (data: UserNoPw): Promise<AxiosResponse<User>> =>
   request.post('fetch', data, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
   })
 
-export const loadData = (): Promise<AxiosResponse<TypeUser>> =>
+export const loadData = (): Promise<AxiosResponse<User>> =>
   request.get('load', {
     headers: {
       Authorization: `Bearer ${getToken()}`,
