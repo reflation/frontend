@@ -21,10 +21,3 @@ export type User = {
 }
 
 export type UserOmitMailid = Omit<User, 'mailid'>
-
-export enum enumSemester {
-  '1학기' = 'FIRST',
-  '하기계절' = 'SUMMER',
-  '2학기' = 'SECOND',
-  '동기계절' = 'WINTER',
-}

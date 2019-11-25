@@ -35,7 +35,7 @@ const FlexBoxColumn = styled(FlexBox)`
   flex-direction: column;
 `
 
-enum enumSemester {
+enum Semester {
   'FIRST' = '1학기',
   'SUMMER' = '여름학기',
   'SECOND' = '2학기',
@@ -66,9 +66,7 @@ const Wrapper = ({
       },
     ])
     setIndex(
-      OmitOutside.map(
-        ({ year, semester }) => `${year}년 ${enumSemester[semester]}`
-      )
+      OmitOutside.map(({ year, semester }) => `${year}년 ${Semester[semester]}`)
     )
   }, [semesters, name])
 
