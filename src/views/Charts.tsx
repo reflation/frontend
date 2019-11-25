@@ -115,25 +115,27 @@ export const LineChart = ({ categories, series }: LineChartProps) => {
   )
 }
 
-// type PieChartProps = {
-//   labels: string[]
-//   series: number[]
-// }
+type PieChartProps = {
+  labels: string[]
+  series: number[]
+}
 
-// const pieOption = {
-//   responsive: [
-//     {
-//       breakpoint: 480,
-//       options: {
-//         chart: {
-//           width: 200,
-//         },
-//         legend: {
-//           position: 'bottom',
-//         },
-//       },
-//     },
-//   ],
-// }
+const pieOption = {
+  responsive: [
+    {
+      breakpoint: 200,
+    },
+  ],
+  legend: {
+    show: false,
+  },
+}
 
-// export const PieChart = ({labels, series}: PieChartProps) => <ApexChart options={{...pieOption, labels}} {series} type="pie" width={CIRCLE_WIDTH} />
+export const PieChart = ({ labels, series }: PieChartProps) => (
+  <ApexChart
+    options={{ ...pieOption, labels }}
+    series={series}
+    type="pie"
+    width={240}
+  />
+)

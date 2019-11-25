@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { white, mainBoxShadow } from '../styles/colors'
-import { DonutChart, LineChart } from './Charts'
+import { DonutChart, LineChart, PieChart } from './Charts'
 import { Regular } from './Text'
 import { SkletonCircle, SkletonLineChart } from './Skleton'
 import { MAX_GPA, REQUIRE_CREADIT } from '../varables'
 import { UserOmitMailid } from '../@types/models'
 import { FlexBox } from '../styles'
+import { GradePointArray, GradePoint } from '../@types/dreamy'
 
 const RegularMarginLeft = styled(Regular)`
   margin-left: 18px;
@@ -42,6 +43,10 @@ enum Semester {
   'WINTER' = '겨울학기',
 }
 
+function count<T>(array: T[], itm: T) {
+  return array.filter(x => x === itm).length
+}
+
 const Wrapper = ({
   name,
   semesters,
@@ -50,14 +55,20 @@ const Wrapper = ({
   const [creadit, setCreadit] = useState<number>()
   const [semesterSeries, setSeries] = useState<any[]>()
   const [sememsterIndex, setIndex] = useState<string[]>()
+  const [gradePer, setGradePer] = useState<number[]>()
 
   useEffect(() => {
-    if (typeof semesters === 'undefined' || typeof name === 'undefined') return
+    if (!semesters || !name) return
     setCreadit(
       semesters
         .map(semester => semester.totalCredit)
         .reduce((acc: number, curr: number) => acc + curr)
     )
+    const flatGrades = semesters
+      .map(semester => semester.subjects.map(subject => subject.grade))
+      .flat()
+    setGradePer(GradePointArray.map(itm => count<GradePoint>(flatGrades, itm)))
+
     const OmitOutside = semesters.filter(({ isOutside }) => !isOutside)
     setSeries([
       {
@@ -88,6 +99,11 @@ const Wrapper = ({
             value={creadit}
             totalValue={REQUIRE_CREADIT}
           />
+        ) : (
+          <SkletonCircle />
+        )}
+        {gradePer ? (
+          <PieChart labels={GradePointArray} series={gradePer} />
         ) : (
           <SkletonCircle />
         )}
