@@ -1,3 +1,5 @@
+import { GradePoint, Course, College } from './dreamy'
+
 export type LoginRes = { mailid: string }
 
 export interface UserNoPw {
@@ -5,7 +7,15 @@ export interface UserNoPw {
   student_pw: string
 }
 
+type Subject = {
+  title: string
+  code: string
+  grade: GradePoint
+  course: Course
+}
+
 export type Semester = {
+  subjects: Subject[]
   averagePoint: number // Float
   totalCredit: number
   isOutside: boolean
@@ -16,7 +26,12 @@ export type Semester = {
 export type User = {
   name: string
   mailid: string
-  averagePoint: number // Float
+  studentID: number
+  averagePoint: number
+  totalPoint: number
+  major: string
+  subMajor: string | null
+  college: College
   semesters: Semester[]
 }
 

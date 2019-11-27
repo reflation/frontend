@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import { white, mainBoxShadow } from '../styles/colors'
-import { DonutChart, LineChart } from './Charts'
+import { DonutChart, LineChart, PieChart } from './Charts'
 import { Regular } from './Text'
 import { SkletonCircle, SkletonLineChart } from './Skleton'
 import { MAX_GPA, REQUIRE_CREADIT } from '../varables'
 import { UserOmitMailid } from '../@types/models'
 import { FlexBox } from '../styles'
+import { A2C, GradePoint } from '../@types/dreamy'
+import { count, sumArray } from '../utils'
 
 const RegularMarginLeft = styled(Regular)`
   margin-left: 18px;
@@ -50,14 +52,22 @@ const Wrapper = ({
   const [creadit, setCreadit] = useState<number>()
   const [semesterSeries, setSeries] = useState<any[]>()
   const [sememsterIndex, setIndex] = useState<string[]>()
+  const [gradePer, setGradePer] = useState<number[]>()
 
   useEffect(() => {
-    if (typeof semesters === 'undefined' || typeof name === 'undefined') return
+    if (!semesters || !name) return
     setCreadit(
       semesters
         .map(semester => semester.totalCredit)
         .reduce((acc: number, curr: number) => acc + curr)
     )
+    const flatGrades = semesters
+      .map(semester => semester.subjects.map(subject => subject.grade))
+      .flat()
+    const A2C_NUM = A2C.map(itm => count<GradePoint>(flatGrades, itm))
+
+    setGradePer([...A2C_NUM, flatGrades.length - sumArray(A2C_NUM)])
+
     const OmitOutside = semesters.filter(({ isOutside }) => !isOutside)
     setSeries([
       {
@@ -88,6 +98,11 @@ const Wrapper = ({
             value={creadit}
             totalValue={REQUIRE_CREADIT}
           />
+        ) : (
+          <SkletonCircle />
+        )}
+        {gradePer ? (
+          <PieChart labels={[...A2C, 'D 이하']} series={gradePer} />
         ) : (
           <SkletonCircle />
         )}
