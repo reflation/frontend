@@ -6,6 +6,7 @@ import { Redirect, Link } from 'react-router-dom'
 import { UserOmitMailid } from '../@types/models'
 
 import Wrapper from '../views/Wrapper'
+import { getToken } from '../utils'
 
 const errorMessages = {
   401: '서버에서 사용자 정보를 찾을 수 없어요 :/',
@@ -31,6 +32,8 @@ const App = () => {
       <Link to="/login">다시 로그인하러 가기</Link>
     </div>
   )
+  if (!getToken()) return <Redirect to="/login" />
+
   if (isCode(undefined) || isCode(200)) return <Wrapper {...userData} />
   if (isCode(204)) return <Redirect to="/fetch" />
   return <Go2Login />
