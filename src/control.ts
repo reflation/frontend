@@ -1,7 +1,7 @@
 import { sendID, loadData } from './api'
-import { TypeLoad } from './@types/state'
+import { TypeLoad } from './domain/state'
 import { fetchData } from './api'
-import { UserNoPw } from './@types/models'
+import { UserNoPw } from './domain/models'
 
 export const submitID = async (mailid: string) => {
   try {

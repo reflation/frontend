@@ -3,7 +3,7 @@ import useAsyncEffect from 'use-async-effect'
 
 import { loadContent, isCodeFF } from '../control'
 import { Redirect, Link } from 'react-router-dom'
-import { UserOmitMailid } from '../@types/models'
+import { UserOmitMailid } from '../domain/models'
 
 import Wrapper from '../views/Wrapper'
 

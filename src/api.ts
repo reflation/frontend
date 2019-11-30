@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { User, UserNoPw } from './@types/models'
+import { User, UserNoPw } from './domain/models'
 import { getToken } from './utils'
 
 const baseURL = 'http://localhost:4000/'
