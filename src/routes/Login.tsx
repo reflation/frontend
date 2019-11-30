@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react'
 
 import { Input } from '../views/Input'
 import { submitID } from '../control'
-import { TypeForm } from '../domain/events'
+import { TypeForm } from '../types/events'
 
 interface FormElements extends HTMLFormElement {
   mailid: HTMLInputElement

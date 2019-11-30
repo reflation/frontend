@@ -4,7 +4,7 @@ import { fetchConent, isCodeFF } from '../control'
 import { Input } from '../views/Input'
 import { saveToken } from '../utils'
 import { Redirect } from 'react-router-dom'
-import { TypeForm } from '../domain/events'
+import { TypeForm } from '../types/events'
 
 interface FormElements extends HTMLFormElement {
   student_no: HTMLInputElement

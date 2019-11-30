@@ -8,8 +8,8 @@ import { SkletonCircle, SkletonLineChart } from './Skleton'
 import { MAX_GPA, REQUIRE_CREADIT } from '../varables'
 import { FlexBox } from '../styles'
 
-import { UserOmitMailid } from '../domain/models'
-import { A2C, GradePoint } from '../domain/dreamy'
+import { UserOmitMailid } from '../types/models'
+import { A2C, GradePoint } from '../types/dreamy'
 
 import { count, sumArray } from '../utils'
 
