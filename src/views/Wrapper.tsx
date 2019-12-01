@@ -6,9 +6,11 @@ import { DonutChart, LineChart, PieChart } from './Charts'
 import { Regular } from './Text'
 import { SkletonCircle, SkletonLineChart } from './Skleton'
 import { MAX_GPA, REQUIRE_CREADIT } from '../varables'
-import { UserOmitMailid } from '../@types/models'
 import { FlexBox } from '../styles'
-import { A2C, GradePoint } from '../@types/dreamy'
+
+import { UserOmitMailid } from '../types/models'
+import { A2C, GradePoint } from '../types/dreamy'
+
 import { count, sumArray } from '../utils'
 
 const RegularMarginLeft = styled(Regular)`
