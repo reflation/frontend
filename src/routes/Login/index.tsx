@@ -1,17 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import {
-  valid,
-  invalid,
-  StatusParam,
-  mapStateToProps,
-  ActionsOmit,
-} from '../../state'
+import { valid, invalid, mapStateToProps, IndexOmitProps } from '../../state'
 
 import View from './view'
 
-const Container = ({ status, ...actions }: ActionsOmit & StatusParam) => (
+const Container = ({ status, ...actions }: IndexOmitProps) => (
   <View status={status} actions={actions} />
 )
 

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { checkMailAddress } from '../../api'
 import { InlineInput } from '../../views/Input'
-import { ActionsOmit, Status, StatusParam } from './../../state'
+import { ActionsOmit, Status, ViewProps } from './../../state'
 import { TypeForm } from '../../types/events'
 
 interface FormElements extends HTMLFormElement {
@@ -12,10 +12,7 @@ interface FormTarget extends TypeForm {
   target: FormElements
 }
 
-export default ({
-  status,
-  actions,
-}: StatusParam & { actions: ActionsOmit }) => {
+export default ({ status, actions }: ViewProps) => {
   switch (status) {
     case Status['pending']:
       return (

@@ -6,8 +6,14 @@ export enum Status {
   'pending',
 }
 
-export type StatusParam = {
+interface Props {
   status: Status
+}
+
+export type IndexOmitProps = Props & ActionsOmit
+
+export interface ViewProps extends Props {
+  actions: ActionsOmit
 }
 
 export type Actions = {
