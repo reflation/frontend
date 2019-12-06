@@ -1,13 +1,6 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 
-import {
-  setPending,
-  setValid,
-  setInvalid,
-  mapStateToProps,
-  IndexProps,
-} from '../../state'
+import { IndexProps, wrapConnect } from '../../state'
 
 import View from './view'
 
@@ -18,7 +11,4 @@ const Container = ({ status, setPending, ...actions }: IndexProps) => {
   return <View status={status} actions={actions} />
 }
 
-export default connect(
-  mapStateToProps,
-  { setValid, setInvalid, setPending }
-)(Container)
+export default wrapConnect(Container)

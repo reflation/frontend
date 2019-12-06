@@ -1,4 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
+import { connect } from 'react-redux'
+import { FunctionComponent } from 'react'
 
 export enum Status {
   'invalid',
@@ -27,9 +29,9 @@ export type ActionsOmit = Omit<Actions, 'setPending'>
 
 const title = 'common'
 
-export const setPending = createAction(`${title}/pending`)
-export const setValid = createAction(`${title}/vaild`)
-export const setInvalid = createAction(`${title}/invaild`)
+const setPending = createAction(`${title}/pending`)
+const setValid = createAction(`${title}/vaild`)
+const setInvalid = createAction(`${title}/invaild`)
 
 const initialState = Status['pending']
 
@@ -40,3 +42,9 @@ export default createReducer(initialState, {
 })
 
 export const mapStateToProps = (state: Status) => ({ status: state })
+
+export const wrapConnect = (View: FunctionComponent<never>) =>
+  connect(
+    mapStateToProps,
+    { setPending, setValid, setInvalid }
+  )(View)
