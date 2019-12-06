@@ -1,7 +1,6 @@
 import { loadData } from './api'
-import { TypeLoad } from './types/state'
 
-export const loadContent = async (): Promise<TypeLoad> => {
+export const loadContent = async () => {
   const { status, data } = await loadData()
   return {
     status,
