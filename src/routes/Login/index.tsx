@@ -1,20 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
 import {
+  setPending,
   setValid,
   setInvalid,
   mapStateToProps,
-  IndexOmitProps,
+  IndexProps,
 } from '../../state'
 
 import View from './view'
 
-const Container = ({ status, ...actions }: IndexOmitProps) => (
-  <View status={status} actions={actions} />
-)
+const Container = ({ status, setPending, ...actions }: IndexProps) => {
+  useEffect(() => {
+    setPending()
+  }, [setPending])
+  return <View status={status} actions={actions} />
+}
 
 export default connect(
   mapStateToProps,
-  { setValid, setInvalid }
+  { setValid, setInvalid, setPending }
 )(Container)
