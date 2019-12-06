@@ -22,7 +22,7 @@ export type Actions = {
 
 export type ActionsOmit = Omit<Actions, 'setPending'>
 
-const title = 'common'
+const title = 'result'
 
 export const setPending = createAction(`${title}/pending`)
 export const setValid = createAction(`${title}/vaild`)
