@@ -31,9 +31,11 @@ export default ({ status, actions }: ViewProps) => {
   }
 }
 
-const onSubmit = (actions: ActionsOmit) => async (event: FormTarget) => {
+const onSubmit = ({ setValid, setInvalid }: ActionsOmit) => async (
+  event: FormTarget
+) => {
   event.preventDefault()
   ;(await checkMailAddress(event.target.username.value))
-    ? actions.valid()
-    : actions.invalid()
+    ? setValid()
+    : setInvalid()
 }
