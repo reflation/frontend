@@ -17,8 +17,8 @@ interface FormTarget extends TypeForm {
   target: FormElements
 }
 
-export default ({ status, actions }: ViewProps) => {
-  switch (status) {
+export default ({ result, actions }: ViewProps) => {
+  switch (result) {
     case Status['pending']:
       return <Form actions={actions} />
     case Status['valid']:
@@ -30,6 +30,8 @@ export default ({ status, actions }: ViewProps) => {
           <Form actions={actions} />
         </Fragment>
       )
+    default:
+      return <p>알 수 없는 오류</p>
   }
 }
 

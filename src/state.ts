@@ -8,16 +8,11 @@ export enum Status {
   'pending',
 }
 
-interface Props {
-  status: Status
-}
+type Result = { result: Status }
 
-export type IndexProps = Props & Actions
-export type IndexOmitProps = Props & ActionsOmit
+export type IndexProps = Result & Actions
 
-export interface ViewProps extends Props {
-  actions: ActionsOmit
-}
+export type ViewProps = Result & { actions: ActionsOmit }
 
 export type Actions = {
   setPending: typeof setPending
@@ -29,9 +24,9 @@ export type ActionsOmit = Omit<Actions, 'setPending'>
 
 const title = 'common'
 
-const setPending = createAction(`${title}/pending`)
-const setValid = createAction(`${title}/vaild`)
-const setInvalid = createAction(`${title}/invaild`)
+export const setPending = createAction(`${title}/pending`)
+export const setValid = createAction(`${title}/vaild`)
+export const setInvalid = createAction(`${title}/invaild`)
 
 const initialState = Status['pending']
 
@@ -41,7 +36,7 @@ export default createReducer(initialState, {
   [setInvalid.type]: _ => Status['invalid'],
 })
 
-export const mapStateToProps = (state: Status) => ({ status: state })
+export const mapStateToProps = ({ result }: Result) => ({ result })
 
 export const wrapConnect = (View: FunctionComponent<never>) =>
   connect(

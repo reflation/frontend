@@ -6,13 +6,13 @@ import View from './view'
 
 import { saveToken } from '../../utils'
 
-const Container = ({ status, setPending, ...actions }: IndexProps) => {
+const Container = ({ result, setPending, ...actions }: IndexProps) => {
   useEffect(() => {
     saveToken()
     setPending()
   }, [setPending])
 
-  return <View status={status} actions={actions} />
+  return <View result={result} actions={actions} />
 }
 
 export default wrapConnect(Container)

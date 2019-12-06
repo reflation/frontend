@@ -12,8 +12,8 @@ interface FormTarget extends TypeForm {
   target: FormElements
 }
 
-export default ({ status, actions }: ViewProps) => {
-  switch (status) {
+export default ({ result, actions }: ViewProps) => {
+  switch (result) {
     case Status['pending']:
       return (
         <Fragment>
@@ -28,6 +28,8 @@ export default ({ status, actions }: ViewProps) => {
       return <p>mail was send</p>
     case Status['invalid']:
       return <p>not found username from mail server</p>
+    default:
+      return <p>알 수 없는 오류</p>
   }
 }
 

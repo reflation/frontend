@@ -4,11 +4,11 @@ import { IndexProps, wrapConnect } from '../../state'
 
 import View from './view'
 
-const Container = ({ status, setPending, ...actions }: IndexProps) => {
+const Container = ({ result, setPending, ...actions }: IndexProps) => {
   useEffect(() => {
     setPending()
   }, [setPending])
-  return <View status={status} actions={actions} />
+  return <View result={result} actions={actions} />
 }
 
 export default wrapConnect(Container)
