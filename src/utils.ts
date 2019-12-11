@@ -6,6 +6,8 @@ export const saveToken = () => {
   ] as string)
 }
 
+export const tokenDelete = () => localStorage.removeItem('token')
+
 export const getToken = () => localStorage.getItem('token')
 
 export function count<T>(array: T[], itm: T) {

@@ -2,22 +2,27 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 import { connect } from 'react-redux'
 import { FunctionComponent } from 'react'
 
+import { setData } from './routes/Main/state'
+
 export enum Status {
   'invalid',
   'valid',
   'pending',
 }
 
-type Result = { result: Status }
+export type Result = { result: Status }
 
-export type IndexProps = Result & Actions
+type Store = { result: Status }
 
-export type ViewProps = Result & { actions: ActionsOmit }
+export type IndexProps = Store & Actions
+
+export type ViewProps = Store & { actions: ActionsOmit }
 
 export type Actions = {
   setPending: typeof setPending
   setValid: typeof setValid
   setInvalid: typeof setInvalid
+  setData?: typeof setData
 }
 
 export type ActionsOmit = Omit<Actions, 'setPending'>
