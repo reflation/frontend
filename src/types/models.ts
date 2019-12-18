@@ -14,12 +14,19 @@ type Subject = {
   course: Course
 }
 
+export enum SemesterEnglish2Korean {
+  'FIRST' = '1학기',
+  'SUMMER' = '여름학기',
+  'SECOND' = '2학기',
+  'WINTER' = '겨울학기',
+}
+
 export type Semester = {
   subjects: Subject[]
   averagePoint: number // Float
   totalCredit: number
   isOutside: boolean
-  semester: 'FIRST' | 'SUMMER' | 'SECOND' | 'WINTER'
+  semester: keyof typeof SemesterEnglish2Korean
   year: number
 }
 
