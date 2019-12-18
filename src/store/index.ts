@@ -4,7 +4,7 @@ import dataReducer from './userInfo'
 
 const reducer = combineReducers({
   result: statusReducer,
-  data: dataReducer,
+  userInfo: dataReducer,
 })
 
 export type RootState = ReturnType<typeof reducer>

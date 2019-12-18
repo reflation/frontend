@@ -10,7 +10,7 @@ import { loadData } from '../../api'
 
 import { RootState } from '../../store'
 
-const selector = ({ result, data }: RootState) => ({ result, data })
+const selector = ({ result, userInfo: data }: RootState) => ({ result, data })
 
 export default () => {
   const dispatch = useDispatch()
