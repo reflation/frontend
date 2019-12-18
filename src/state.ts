@@ -12,12 +12,6 @@ export enum Status {
 
 export type Result = { result: Status }
 
-type Store = { result: Status }
-
-export type IndexProps = Store & Actions
-
-export type ViewProps = Store & { actions: ActionsOmit }
-
 export type Actions = {
   setPending: typeof setPending
   setValid: typeof setValid
@@ -25,20 +19,18 @@ export type Actions = {
   setData?: typeof setData
 }
 
-export type ActionsOmit = Omit<Actions, 'setPending'>
-
 const title = 'result'
 
 export const setPending = createAction(`${title}/pending`)
 export const setValid = createAction(`${title}/vaild`)
 export const setInvalid = createAction(`${title}/invaild`)
 
-const initialState = Status['pending']
+const initialState = Status.pending
 
 export default createReducer(initialState, {
-  [setPending.type]: _ => Status['pending'],
-  [setValid.type]: _ => Status['valid'],
-  [setInvalid.type]: _ => Status['invalid'],
+  [setPending.type]: _ => Status.pending,
+  [setValid.type]: _ => Status.valid,
+  [setInvalid.type]: _ => Status.invalid,
 })
 
 export const mapStateToProps = ({ result }: Result) => ({ result })

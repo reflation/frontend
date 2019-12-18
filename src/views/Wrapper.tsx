@@ -8,7 +8,9 @@ import { SkletonCircle, SkletonLineChart } from './Skleton'
 import { MAX_GPA, REQUIRE_CREADIT } from '../varables'
 import { FlexBox } from '../styles'
 
-import { UserOmitMailid } from '../types/models'
+import Table from './Table'
+
+import { User } from '../types/models'
 import { A2C, GradePoint } from '../types/dreamy'
 
 import { count, sumArray } from '../utils'
@@ -46,11 +48,7 @@ enum Semester {
   'WINTER' = '겨울학기',
 }
 
-const Wrapper = ({
-  name,
-  semesters,
-  averagePoint,
-}: Partial<UserOmitMailid>) => {
+const Wrapper = ({ name, semesters, averagePoint }: Partial<User>) => {
   const [creadit, setCreadit] = useState<number>()
   const [semesterSeries, setSeries] = useState<any[]>()
   const [sememsterIndex, setIndex] = useState<string[]>()
@@ -95,11 +93,13 @@ const Wrapper = ({
           <SkletonCircle />
         )}
         {creadit ? (
-          <DonutChart
-            title={'취득학점'}
-            value={creadit}
-            totalValue={REQUIRE_CREADIT}
-          />
+          <div style={{ marginLeft: '2em' }}>
+            <DonutChart
+              title={'취득학점'}
+              value={creadit}
+              totalValue={REQUIRE_CREADIT}
+            />
+          </div>
         ) : (
           <SkletonCircle />
         )}
@@ -117,6 +117,7 @@ const Wrapper = ({
           <SkletonLineChart />
         )}
       </FlexBoxColumn>
+      <Table />
     </RootBox>
   )
 }

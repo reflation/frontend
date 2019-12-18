@@ -9,7 +9,7 @@ import { Ul, Li } from '../../views/LeftNav'
 import styled from 'styled-components'
 import { mainBoxShadow, white } from '../../styles/colors'
 
-import { UserOmitMailid } from '../../types/models'
+import { User } from '../../types/models'
 import { Result, Status } from '../../state'
 
 const Root = styled(FlexBox)`
@@ -24,18 +24,16 @@ const Root = styled(FlexBox)`
   padding-bottom: 24px;
 `
 
-type Data = { data: UserOmitMailid | null }
+type Data = { data: User | null }
 
 export default ({ result, data }: Result & Data) => {
   switch (result) {
     case Status['pending']:
       return <View data={data} />
-    case Status['valid']:
-      return <View data={data} />
     case Status['invalid']:
       return <Redirect to="/login" />
     default:
-      return <p>알 수 없는 오류</p>
+      return <View data={data} />
   }
 }
 

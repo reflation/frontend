@@ -7,4 +7,6 @@ const reducer = combineReducers({
   data: dataReducer,
 })
 
+export type RootState = ReturnType<typeof reducer>
+
 export default configureStore({ reducer })

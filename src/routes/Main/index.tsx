@@ -1,56 +1,38 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 
-import {
-  setPending,
-  setValid,
-  setInvalid,
-  IndexProps,
-  Actions,
-  Result,
-} from '../../state'
+import { setPending, setInvalid } from '../../state'
 import { setData } from './state'
-
-import { loadContent } from '../../control'
-import { UserOmitMailid } from '../../types/models'
 
 import View from './view'
 
-const load = async ({
-  setValid,
-  setData,
-  setInvalid,
-}: Omit<Actions, 'setPending'>) => {
+import { useDispatch, useSelector } from 'react-redux'
+import { loadData } from '../../api'
+
+import { RootState } from '../../store'
+
+const selector = ({ result, data }: RootState) => ({ result, data })
+
+export default () => {
+  const dispatch = useDispatch()
+  const { result, data } = useSelector(selector)
+  const loading = async () => {
+    const data = await fetching()
+    data ? dispatch(setData(data)) : dispatch(setInvalid())
+  }
+
+  useEffect(() => {
+    dispatch(setPending())
+    loading()
+    // eslint-disable-next-line
+  }, [])
+
+  return <View result={result} data={data} />
+}
+
+const fetching = async () => {
   try {
-    const { data } = await loadContent()
-    setValid()
-    // @ts-ignore: TS2722
-    setData(data)
+    return (await loadData()).data
   } catch (e) {
-    setInvalid()
+    return false
   }
 }
-
-type Props = IndexProps & { data?: { type: string; payload: UserOmitMailid } }
-
-const Container = ({ result, data, setPending, ...actions }: Props) => {
-  useEffect(() => {
-    setPending()
-    load(actions)
-    // eslint-disable-next-line
-  }, [setPending])
-
-  return <View result={result} data={data ? data.payload : null} />
-}
-
-const mapStateToProps = ({
-  result,
-  data,
-}: Result & {
-  data: UserOmitMailid
-}) => ({ result, data })
-
-export default connect(
-  mapStateToProps,
-  { setPending, setValid, setInvalid, setData }
-)(Container)

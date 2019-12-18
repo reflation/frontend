@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react'
 import { Redirect } from 'react-router'
 
-import { ViewProps, Status, ActionsOmit } from '../../state'
+import { Status, Result, setValid, setInvalid } from '../../state'
 
 import { TypeForm } from '../../types/events'
 
 import { Input } from '../../views/Input'
 import { savePointToServer } from '../../api'
+import { useDispatch } from 'react-redux'
 
 interface FormElements extends HTMLFormElement {
   student_no: HTMLInputElement
@@ -17,17 +18,17 @@ interface FormTarget extends TypeForm {
   target: FormElements
 }
 
-export default ({ result, actions }: ViewProps) => {
+export default ({ result }: Result) => {
   switch (result) {
-    case Status['pending']:
-      return <Form actions={actions} />
-    case Status['valid']:
+    case Status.pending:
+      return <Form />
+    case Status.valid:
       return <Redirect to="/main" />
-    case Status['invalid']:
+    case Status.invalid:
       return (
         <Fragment>
           <p>입력한 정보가 유효하지 않습니다</p>
-          <Form actions={actions} />
+          <Form />
         </Fragment>
       )
     default:
@@ -35,25 +36,33 @@ export default ({ result, actions }: ViewProps) => {
   }
 }
 
-const Form = ({ actions }: { actions: ActionsOmit }) => (
-  <div id="form">
-    <p>학번 및 비밀번호를 입력해주세요!</p>
-    <form onSubmit={onSubmit(actions)}>
-      <Input name="student_no" />
-      <Input name="student_pw" type="password" />
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-)
+const Form = () => {
+  const dispatch = useDispatch()
+  return (
+    <div id="form">
+      <p>학번 및 비밀번호를 입력해주세요!</p>
+      <form
+        onSubmit={async ({
+          target: { student_no, student_pw },
+          preventDefault,
+        }: FormTarget) => {
+          preventDefault()
+          ;(await onSubmit(student_no.value, student_pw.value))
+            ? dispatch(setValid())
+            : dispatch(setInvalid())
+        }}
+      >
+        <Input name="student_no" />
+        <Input name="student_pw" type="password" />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  )
+}
 
-const onSubmit = ({ setValid, setInvalid }: ActionsOmit) => async (
-  event: FormTarget
-) => {
-  event.preventDefault()
-  ;(await savePointToServer({
-    student_no: parseInt(event.target.student_no.value),
-    student_pw: event.target.student_pw.value,
-  }))
-    ? setValid()
-    : setInvalid()
+const onSubmit = async (student_no: string, student_pw: string) => {
+  return await savePointToServer({
+    student_no: parseInt(student_no),
+    student_pw,
+  })
 }

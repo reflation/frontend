@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react'
 
-import { IndexProps, wrapConnect } from '../../state'
-
 import View from './view'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../store'
+import { setPending } from '../../state'
 
-const Container = ({ result, setPending, ...actions }: IndexProps) => {
+const selector = ({ result }: RootState) => ({ result })
+
+export default () => {
+  const { result } = useSelector(selector)
+  const dispatch = useDispatch()
   useEffect(() => {
-    setPending()
-  }, [setPending])
-  return <View result={result} actions={actions} />
+    dispatch(setPending())
+  }, [dispatch])
+  return <View result={result} />
 }
-
-export default wrapConnect(Container)

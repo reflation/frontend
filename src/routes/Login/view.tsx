@@ -1,8 +1,13 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+
+import { Box, Title, Form, Input, InputWrap } from './styled'
+import { SubmitWithText } from '../../views/Button'
+import { Root } from '../../views/Box'
+
 import { checkMailAddress } from '../../api'
-import { InlineInput } from '../../views/Input'
-import { ActionsOmit, Status, ViewProps } from './../../state'
+import { Status, Result, setValid, setInvalid } from './../../state'
 import { TypeForm } from '../../types/events'
+import { useDispatch } from 'react-redux'
 
 interface FormElements extends HTMLFormElement {
   username: HTMLInputElement
@@ -12,32 +17,60 @@ interface FormTarget extends TypeForm {
   target: FormElements
 }
 
-export default ({ result, actions }: ViewProps) => {
+const Message = ({
+  message,
+}: {
+  message: 'mail was send' | 'not found username' | '알 수 없는 오류'
+}) => {
+  if (message === 'mail was send') window.open('https://webmail.jejunu.ac.kr')
+  return (
+    <Root>
+      <Box>
+        <Title>{message}</Title>
+      </Box>
+    </Root>
+  )
+}
+
+export default ({ result }: Result) => {
+  const dispatch = useDispatch()
+
   switch (result) {
     case Status['pending']:
       return (
-        <Fragment>
-          <p>제주대학교 메일을 입력해주세요!</p>
-          <form onSubmit={onSubmit(actions)}>
-            <InlineInput name="username" />
-            <span>@jeju.ac.kr</span>
-          </form>
-        </Fragment>
+        <Root>
+          <Box>
+            <Title>학교 메일로 로그인하기</Title>
+            <Form
+              onSubmit={async (event: FormTarget) => {
+                event.preventDefault()
+                ;(await onSubmit(event.target.username.value))
+                  ? dispatch(setValid())
+                  : dispatch(setInvalid())
+              }}
+            >
+              <InputWrap>
+                <Input name="username" />
+                <span>@jejunu.ac.kr</span>
+              </InputWrap>
+              <SubmitWithText text={'보내기'} />
+            </Form>
+          </Box>
+        </Root>
       )
     case Status['valid']:
-      return <p>mail was send</p>
+      return <Message message={'mail was send'} />
     case Status['invalid']:
-      return <p>not found username from mail server</p>
+      return <Message message={'not found username'} />
     default:
-      return <p>알 수 없는 오류</p>
+      return <Message message={'알 수 없는 오류'} />
   }
 }
 
-const onSubmit = ({ setValid, setInvalid }: ActionsOmit) => async (
-  event: FormTarget
-) => {
-  event.preventDefault()
-  ;(await checkMailAddress(event.target.username.value))
-    ? setValid()
-    : setInvalid()
+const onSubmit = async (username: string) => {
+  try {
+    return await checkMailAddress(username)
+  } catch (e) {
+    return false
+  }
 }

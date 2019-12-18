@@ -17,7 +17,7 @@ type DonutProps =
       totalValue: TYPE_REQUIRE_CREADIT
     }
 
-const CIRCLE_WIDTH = { width: '170px' }
+const DonutStyle = { width: '170px', marginBottom: '1em' }
 
 export const DonutChart = ({ title, value, totalValue }: DonutProps) => {
   const isGPA = title === '평점'
@@ -60,7 +60,7 @@ export const DonutChart = ({ title, value, totalValue }: DonutProps) => {
         fontSize: '21px',
         fill: black,
       }}
-      style={CIRCLE_WIDTH}
+      style={DonutStyle}
     />
   )
 }

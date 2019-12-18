@@ -11,6 +11,7 @@ const Parent = styled.span<Props>`
   color: ${props => props.color || black};
   font-size: ${props => props.size || 16}px;
   line-height: ${props => props.height + 'px' || 'auto'};
+  font-family: NanumSquareRound;
 `
 
 export const Light = styled(Parent)`

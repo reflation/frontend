@@ -1,17 +1,14 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
 
-import { UserOmitMailid } from '../../types/models'
-
-type Action = UserOmitMailid | {}
+import { User } from '../../types/models'
 
 const title = 'main'
 
-export const setData = createAction<Action>(`${title}/setData`)
+export const setData = createAction<User>(`${title}/setData`)
 
-export type Data = typeof setData
-
-const initialState: Action = {}
+// @ts-ignore
+const initialState: User = null
 
 export default createReducer(initialState, {
-  [setData.type]: (state, data: Action) => data,
+  [setData.type]: (state, action: PayloadAction<User>) => action.payload,
 })

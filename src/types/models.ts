@@ -25,7 +25,6 @@ export type Semester = {
 
 export type User = {
   name: string
-  mailid: string
   studentID: number
   averagePoint: number
   totalPoint: number
@@ -34,5 +33,3 @@ export type User = {
   college: College
   semesters: Semester[]
 }
-
-export type UserOmitMailid = Omit<User, 'mailid'>
