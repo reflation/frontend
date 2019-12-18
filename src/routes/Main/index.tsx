@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 
-import { setPending, setInvalid } from '../../store/status'
+import { Redirect } from 'react-router-dom'
+
+import { setPending, setInvalid, Status, setValid } from '../../store/status'
 import { setData } from '../../store/userInfo'
 
-import View from './view'
+import View, { MainSkleton } from './view'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { loadData } from '../../api'
@@ -16,8 +18,11 @@ export default () => {
   const dispatch = useDispatch()
   const { result, data } = useSelector(selector)
   const loading = async () => {
-    const data = await fetching()
-    data ? dispatch(setData(data)) : dispatch(setInvalid())
+    const fetched = await fetching()
+    if (fetched) {
+      dispatch(setData(fetched))
+      dispatch(setValid())
+    } else dispatch(setInvalid())
   }
 
   useEffect(() => {
@@ -26,7 +31,16 @@ export default () => {
     // eslint-disable-next-line
   }, [])
 
-  return <View result={result} data={data} />
+  switch (result) {
+    case Status.pending:
+      return <MainSkleton />
+    case Status.invalid:
+      return <Redirect to="/login" />
+    case Status.valid:
+      return <View data={data} />
+    default:
+      return <div>알 수 없는 오류</div>
+  }
 }
 
 const fetching = async () => {

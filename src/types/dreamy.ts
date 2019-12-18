@@ -34,7 +34,7 @@ export type GradePoint =
   | 'D-'
   | 'F'
 
-export const A2C: Exclude<GradePoint, 'D+' | 'D0' | 'D-' | 'F'>[] = [
+export const gradeRangeAToC = [
   'A+',
   'A0',
   'A-',
@@ -44,7 +44,7 @@ export const A2C: Exclude<GradePoint, 'D+' | 'D0' | 'D-' | 'F'>[] = [
   'C+',
   'C0',
   'C-',
-]
+] as const
 
 export enum GradeNum {
   'A+' = 4.3,
