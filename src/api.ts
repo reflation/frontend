@@ -5,14 +5,21 @@ import { getToken } from './utils'
 const baseURL = 'http://localhost:4000/'
 const request = axios.create({ baseURL })
 
-export const checkMailAddress = async (mailid: string) =>
-  (await request.post(
-    'login',
-    { mailid },
-    {
-      headers: { 'Content-Type': 'application/json' },
-    }
-  )).status === 201
+export const checkMailAddress = async (mailid: string) => {
+  try {
+    return (
+      (await request.post(
+        'login',
+        { mailid },
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )).status === 201
+    )
+  } catch (e) {
+    return false
+  }
+}
 
 export const savePointToServer = async (data: UserNoPw) =>
   (await request.post('fetch', data, {

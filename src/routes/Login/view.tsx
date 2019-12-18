@@ -35,20 +35,20 @@ const Message = ({
 export default ({ result }: Result) => {
   const dispatch = useDispatch()
 
+  const onSubmit = async (event: FormTarget) => {
+    event.preventDefault()
+    ;(await checkMailAddress(event.target.username.value))
+      ? dispatch(setValid())
+      : dispatch(setInvalid())
+  }
+
   switch (result) {
     case Status['pending']:
       return (
         <Root>
           <Box>
             <Title>학교 메일로 로그인하기</Title>
-            <Form
-              onSubmit={async (event: FormTarget) => {
-                event.preventDefault()
-                ;(await onSubmit(event.target.username.value))
-                  ? dispatch(setValid())
-                  : dispatch(setInvalid())
-              }}
-            >
+            <Form onSubmit={onSubmit}>
               <InputWrap>
                 <Input name="username" />
                 <span>@jejunu.ac.kr</span>
@@ -67,10 +67,3 @@ export default ({ result }: Result) => {
   }
 }
 
-const onSubmit = async (username: string) => {
-  try {
-    return await checkMailAddress(username)
-  } catch (e) {
-    return false
-  }
-}
