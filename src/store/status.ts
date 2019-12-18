@@ -2,7 +2,7 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 import { connect } from 'react-redux'
 import { FunctionComponent } from 'react'
 
-import { setData } from './routes/Main/state'
+import { setData } from './userInfo'
 
 export enum Status {
   'invalid',

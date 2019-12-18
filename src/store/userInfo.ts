@@ -1,6 +1,6 @@
 import { createAction, createReducer, PayloadAction } from '@reduxjs/toolkit'
 
-import { User } from '../../types/models'
+import { User } from '../types/models'
 
 const title = 'main'
 

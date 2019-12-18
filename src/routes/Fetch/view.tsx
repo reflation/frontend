@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Redirect } from 'react-router'
 
-import { Status, Result, setValid, setInvalid } from '../../state'
+import { Status, Result, setValid, setInvalid } from '../../store/status'
 
 import { TypeForm } from '../../types/events'
 

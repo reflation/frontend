@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { mainBoxShadow, white } from '../../styles/colors'
 
 import { User } from '../../types/models'
-import { Result, Status } from '../../state'
+import { Result, Status } from '../../store/status'
 
 const Root = styled(FlexBox)`
   box-shadow: 0 19px 32px ––0 ${mainBoxShadow};

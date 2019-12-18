@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
-import { setPending, setInvalid } from '../../state'
-import { setData } from './state'
+import { setPending, setInvalid } from '../../store/status'
+import { setData } from '../../store/userInfo'
 
 import View from './view'
 

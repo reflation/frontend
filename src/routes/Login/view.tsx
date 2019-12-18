@@ -5,7 +5,7 @@ import { SubmitWithText } from '../../views/Button'
 import { Root } from '../../views/Box'
 
 import { checkMailAddress } from '../../api'
-import { Status, Result, setValid, setInvalid } from './../../state'
+import { Status, Result, setValid, setInvalid } from '../../store/status'
 import { TypeForm } from '../../types/events'
 import { useDispatch } from 'react-redux'
 
@@ -66,4 +66,3 @@ export default ({ result }: Result) => {
       return <Message message={'알 수 없는 오류'} />
   }
 }
-

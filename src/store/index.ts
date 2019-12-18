@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import statusReducer from './state'
-import dataReducer from './routes/Main/state'
+import statusReducer from './status'
+import dataReducer from './userInfo'
 
 const reducer = combineReducers({
   result: statusReducer,
