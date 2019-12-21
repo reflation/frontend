@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import statusReducer from './status'
-import dataReducer from './userInfo'
+import resultReducer from './status'
+import userInfoReducer from './userInfo'
 
 const reducer = combineReducers({
-  result: statusReducer,
-  userInfo: dataReducer,
+  result: resultReducer,
+  userInfo: userInfoReducer,
 })
 
 export type RootState = ReturnType<typeof reducer>
