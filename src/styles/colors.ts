@@ -22,3 +22,5 @@ export const invaild = {
 
 export const green = 'rgba(82, 196, 26, 0.85)'
 export const red = '#f5222d'
+
+export const cellBackground = '#fafafa'
