@@ -34,3 +34,8 @@ export const SkletonLineChart = styled(Skeleton)`
   height: 150px;
   border-radius: 5px;
 `
+
+export const SkletonTable = styled(Skeleton)`
+  width: 100%;
+  height: 122px;
+`

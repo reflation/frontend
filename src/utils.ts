@@ -46,9 +46,19 @@ export const postProcesser = ({ name, semesters, averagePoint }: User) => {
       data: semesterOmitOutside.map(semester => semester.averagePoint),
     },
   ]
+  const semesterNamesWithOutside = semesters.map(
+    ({ year, semester }) => `${year}년 ${SemesterEnglish2Korean[semester]}`
+  )
   const semesterNames = semesterOmitOutside.map(
     ({ year, semester }) => `${year}년 ${SemesterEnglish2Korean[semester]}`
   )
 
-  return { creadit, gradeRate, gradeRateAverages, semesterNames, averagePoint }
+  return {
+    creadit,
+    gradeRate,
+    gradeRateAverages,
+    semesterNames,
+    averagePoint,
+    semesterNamesWithOutside,
+  }
 }

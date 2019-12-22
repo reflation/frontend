@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { cellBackground } from '../styles/colors'
+import { Subject } from '../types/models'
+import { GradeNum } from '../types/dreamy'
 
 const Table = styled.table`
   align-self: center;
@@ -38,29 +40,25 @@ const Tr = styled.tr`
   }
 `
 
-export default () => (
+export default ({ subjects }: { subjects: Subject[] }) => (
   <Table>
     <Thead>
       <tr>
         <Th>성적</Th>
         <Th>학점</Th>
         <Th>과목명</Th>
-        <Th>담당교수</Th>
+        <Th>이수구분</Th>
       </tr>
     </Thead>
     <tbody>
-      <Tr>
-        <Td>A</Td>
-        <Td>2</Td>
-        <Td align="left">소프트웨어기초영어</Td>
-        <Td></Td>
-      </Tr>
-      {/* <Tr>
-        <Td>A+</Td>
-        <Td>3</Td>
-        <Td align="left">오픈소스 개발 방법론</Td>
-        <Td>안진현</Td>
-      </Tr> */}
+      {subjects.map(({ grade, title, course }) => (
+        <Tr>
+          <Td>{grade}</Td>
+          <Td>{GradeNum[grade]}</Td>
+          <Td align="left">{title}</Td>
+          <Td align="left">{course}</Td>
+        </Tr>
+      ))}
     </tbody>
   </Table>
 )
