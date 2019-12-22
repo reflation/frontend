@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { white, darken_lite, black, darken_normal } from '../styles/colors'
 
-export const Li = styled.li<{ isSelect?: true }>`
+export const Li = styled.li<{ isSelect: boolean }>`
   width: 120px;
   height: 48px;
   margin-left: 24px;

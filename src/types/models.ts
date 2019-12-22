@@ -7,7 +7,7 @@ export interface UserNoPw {
   student_pw: string
 }
 
-type Subject = {
+export type Subject = {
   title: string
   code: string
   grade: GradePoint

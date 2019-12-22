@@ -7,9 +7,7 @@ import { Bold, Regular } from './Text'
 import { tokenDelete } from '../utils'
 
 interface Props {
-  items: string[]
   name: string
-  active?: number
 }
 
 interface Value {
@@ -67,15 +65,8 @@ const ItemName = styled.li`
   margin-left: 6px;
 `
 
-export default ({ items, name, active }: Props) => (
+export default ({ name }: Props) => (
   <Header>
-    <LeftMenu>
-      {items.map((val, idx) => (
-        <BoldText as="li" key={idx} idx={idx} active={active}>
-          {val}
-        </BoldText>
-      ))}
-    </LeftMenu>
     <RightMenu>
       <ItemName>
         <Regular>{name}</Regular>
