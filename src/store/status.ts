@@ -1,6 +1,4 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { connect } from 'react-redux'
-import { FunctionComponent } from 'react'
 
 import { setData } from './userInfo'
 import { RootState } from '.'
@@ -35,11 +33,3 @@ export default createReducer(initialState, {
 })
 
 export const selector = ({ result }: RootState) => ({ result })
-
-export const mapStateToProps = ({ result }: Result) => ({ result })
-
-export const wrapConnect = (View: FunctionComponent<never>) =>
-  connect(
-    mapStateToProps,
-    { setPending, setValid, setInvalid }
-  )(View)
