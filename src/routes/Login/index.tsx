@@ -2,10 +2,7 @@ import React, { useEffect } from 'react'
 
 import View from './view'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootState } from '../../store'
-import { setPending } from '../../store/status'
-
-const selector = ({ result }: RootState) => ({ result })
+import { selector, setPending } from '../../store/status'
 
 export default () => {
   const { result } = useSelector(selector)
