@@ -37,12 +37,15 @@ export type GradePoint =
 export const gradeRangeAToC = [
   'A+',
   'A0',
+  'A',
   'A-',
   'B+',
   'B0',
+  'B',
   'B-',
   'C+',
   'C0',
+  'C',
   'C-',
 ] as const
 
