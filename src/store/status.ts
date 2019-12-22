@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { FunctionComponent } from 'react'
 
 import { setData } from './userInfo'
+import { RootState } from '.'
 
 export enum Status {
   'invalid',
@@ -32,6 +33,8 @@ export default createReducer(initialState, {
   [setValid.type]: _ => Status.valid,
   [setInvalid.type]: _ => Status.invalid,
 })
+
+export const selector = ({ result }: RootState) => ({ result })
 
 export const mapStateToProps = ({ result }: Result) => ({ result })
 
