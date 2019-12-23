@@ -6,6 +6,10 @@
 
 [Documentation](https://x86chi.gitbook.io/reflation/)
 
+## Type Check Status
+
+[![CircleCI](https://circleci.com/gh/reflation/frontend.svg?style=svg)](https://circleci.com/gh/reflation/frontend)
+
 ## License
 
 [MIT](./LICENSE)
