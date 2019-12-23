@@ -33,6 +33,7 @@ export const postProcesser = ({ name, semesters, averagePoint }: User) => {
     .flat()
 
   const series = gradeRangeAToC.map(grade =>
+    // @ts-ignore
     count<GradePoint>(gradePoint, grade)
   )
 
