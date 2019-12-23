@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, TitleCenter, Form, Input, InputWrap, Domain } from '../styled'
+import { Box, TitleCenter, Form, Input, Domain } from '../styled'
 import { SubmitWithText } from '../../views/Button'
 import { Root } from '../../views/Box'
 
@@ -46,13 +46,21 @@ export default ({ result }: Result) => {
     case Status['pending']:
       return (
         <Root>
-          <Box>
+          <Box style={{ justifyContent: 'center', height: '330px' }}>
             <TitleCenter>학교 메일로 로그인하기</TitleCenter>
             <Form onSubmit={onSubmit}>
-              <InputWrap>
-                <Input name="username" />
+              <div>
+                <Input
+                  autoFocus
+                  autoComplete="off"
+                  name="username"
+                  onChange={e => {
+                    e.target.style.width =
+                      (e.target.value.length + 1) * 7 + 'px'
+                  }}
+                />
                 <Domain>@jejunu.ac.kr</Domain>
-              </InputWrap>
+              </div>
               <SubmitWithText text={'보내기'} />
             </Form>
           </Box>

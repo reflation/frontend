@@ -37,11 +37,7 @@ export const Form = styled.form`
 
 export const Input = styled(InlineInput)`
   text-align: right;
-  width: 50px;
-`
-
-export const InputWrap = styled.div`
-  margin-bottom: 32px;
+  width: 1rem;
 `
 
 export const Domain = styled(Regular)`
