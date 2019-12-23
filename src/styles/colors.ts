@@ -6,6 +6,7 @@ export const darken_normal = 'rgba(0, 0, 0, 0.65)'
 export const darken_medium = 'rgba(0, 0, 0, 0.25)'
 export const darken_lite = 'rgba(0, 0, 0, 0.09)'
 export const darken_ultra = 'rgba(0, 0, 0, 0.03)'
+export const transparent = 'rgba(0, 0, 0, 0)'
 export const background = '#f7f7f7'
 
 export const mainBoxShadow = 'rgba(21, 19, 19, 0.07)'

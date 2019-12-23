@@ -8,7 +8,8 @@ const Submit = styled.button`
   height: 50px;
   border-radius: 27px;
   background-color: ${primary};
-  marign: 11px 52px;
+  margin: 37px 52px;
+  padding: 0 42px;
   cursor: pointer;
 `
 
@@ -18,7 +19,7 @@ const Text = styled(Bold)`
   text-align: center;
 `
 
-export const SubmitWithText = ({ text }: { text: '보내기' | 'LOGIN' }) => (
+export const SubmitWithText = ({ text }: { text: '보내기' | '받아오기' }) => (
   <Submit>
     <Text>{text}</Text>
   </Submit>

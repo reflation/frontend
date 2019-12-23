@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, Title, Form, Input, InputWrap } from './styled'
+import { Box, TitleCenter, Form, Input, InputWrap, Domain } from '../styled'
 import { SubmitWithText } from '../../views/Button'
 import { Root } from '../../views/Box'
 
@@ -26,7 +26,7 @@ const Message = ({
   return (
     <Root>
       <Box>
-        <Title>{message}</Title>
+        <TitleCenter>{message}</TitleCenter>
       </Box>
     </Root>
   )
@@ -47,11 +47,11 @@ export default ({ result }: Result) => {
       return (
         <Root>
           <Box>
-            <Title>학교 메일로 로그인하기</Title>
+            <TitleCenter>학교 메일로 로그인하기</TitleCenter>
             <Form onSubmit={onSubmit}>
               <InputWrap>
                 <Input name="username" />
-                <span>@jejunu.ac.kr</span>
+                <Domain>@jejunu.ac.kr</Domain>
               </InputWrap>
               <SubmitWithText text={'보내기'} />
             </Form>
