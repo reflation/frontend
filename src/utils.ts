@@ -1,7 +1,7 @@
 import qs from 'querystring'
 
 import { User, SemesterEnglish2Korean } from './types/models'
-import { GradePoint, gradeRangeAToC } from './types/dreamy'
+import { gradeRangeAToC } from './types/dreamy'
 
 export const saveToken = () => {
   localStorage.setItem('token', qs.parse(window.location.search)[
@@ -12,10 +12,6 @@ export const saveToken = () => {
 export const tokenDelete = () => localStorage.removeItem('token')
 
 export const getToken = () => localStorage.getItem('token')
-
-function count<T>(array: T[], itm: T) {
-  return array.filter(x => x === itm).length
-}
 
 const reduce = (pre: number, curr: number) => pre + curr
 
@@ -32,9 +28,8 @@ export const postProcesser = ({ name, semesters, averagePoint }: User) => {
     .map(({ subjects }) => subjects.map(({ grade }) => grade))
     .flat()
 
-  const series = gradeRangeAToC.map(grade =>
-    // @ts-ignore
-    count<GradePoint>(gradePoint, grade)
+  const series = gradeRangeAToC.map(
+    grade => gradePoint.filter(point => point === grade).length
   )
 
   const gradeRate = [...series, gradePoint.length - sumArray(series)]
