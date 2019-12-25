@@ -3,15 +3,14 @@ import React, { useEffect } from 'react'
 import View from './view'
 import { useDispatch, useSelector } from 'react-redux'
 import { selector, setPending } from '../../store/status'
-import { ifHasTokenRedirect } from '../../utils'
+import { getToken } from '../../utils'
+import { Redirect } from 'react-router-dom'
 
 export default () => {
-  ifHasTokenRedirect()
-
   const { result } = useSelector(selector)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(setPending())
   }, [dispatch])
-  return <View result={result} />
+  return getToken() ? <Redirect to="main" /> : <View result={result} />
 }
