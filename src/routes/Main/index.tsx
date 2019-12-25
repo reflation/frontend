@@ -12,24 +12,23 @@ import { loadData } from '../../api'
 
 import { RootState } from '../../store'
 
-const selector = ({ result, userInfo: data }: RootState) => ({ result, data })
+const selector = ({ result, userInfo }: RootState) => ({ result, userInfo })
 
 export default () => {
   const dispatch = useDispatch()
-  const { result, data } = useSelector(selector)
+  const { result, userInfo } = useSelector(selector)
   const loading = async () => {
     const fetched = await fetching()
-    if (fetched) {
-      dispatch(setData(fetched))
-      dispatch(setValid())
-    } else dispatch(setInvalid())
+    if (fetched) dispatch(setData(fetched))
+    else dispatch(setInvalid())
   }
 
   useEffect(() => {
     dispatch(setPending())
-    loading()
+    if (!userInfo) loading()
+    else dispatch(setValid())
     // eslint-disable-next-line
-  }, [])
+  }, [userInfo])
 
   switch (result) {
     case Status.pending:
@@ -37,7 +36,7 @@ export default () => {
     case Status.invalid:
       return <Redirect to="/login" />
     case Status.valid:
-      return <View data={data} />
+      return <View data={userInfo} />
     default:
       return <div>알 수 없는 오류</div>
   }
