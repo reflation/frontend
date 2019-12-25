@@ -9,6 +9,10 @@ export const saveToken = () => {
   ] as string)
 }
 
+export const ifHasTokenRedirect = () => {
+  if (getToken()) window.location.href = '/main'
+}
+
 export const tokenDelete = () => localStorage.removeItem('token')
 
 export const getToken = () => localStorage.getItem('token')
