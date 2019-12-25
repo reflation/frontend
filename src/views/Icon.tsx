@@ -1,44 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
-import classnames from 'classnames'
-import { black } from '../styles/colors'
 
-type Name =
-  | 'user'
-  | 'lock'
-  | 'up'
-  | 'right'
-  | 'left'
-  | 'down'
-  | 'search'
-  | 'mail'
-  | 'check'
-  | 'bell'
-  | 'upload'
-  | 'print'
-  | 'table'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import { darken_medium } from '../styles/colors'
 
-type Size = 16 | 18
+export const User = () => (
+  <FontAwesomeIcon color={darken_medium} icon={faUser} />
+)
 
-interface Parent {
-  size?: Size
-  color?: string
-  className?: string
-}
-
-interface Props extends Parent {
-  name: Name
-}
-
-const IconStyle = styled.i<Parent>`
-  font-size: ${props => props.size || 16}px;
-  color: ${props => props.color || black};
-`
-
-export default ({ name, size, color, className }: Props) => (
-  <IconStyle
-    className={classnames('icon-' + name, className)}
-    size={size}
-    color={color}
-  />
+export const Lock = () => (
+  <FontAwesomeIcon color={darken_medium} icon={faLock} />
 )
