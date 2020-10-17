@@ -1,13 +1,7 @@
-import qs from 'querystring'
-
 import { User, SemesterEnglish2Korean } from './types/models'
 import { gradeRangeAToC } from './types/dreamy'
 
-export const saveToken = () => {
-  localStorage.setItem('token', qs.parse(window.location.search)[
-    '?token'
-  ] as string)
-}
+export const saveToken = (token: string) => localStorage.setItem('token', token)
 
 export const tokenDelete = () => localStorage.removeItem('token')
 
