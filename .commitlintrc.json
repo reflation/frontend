@@ -1,19 +1,7 @@
 {
   "extends": ["@commitlint/config-conventional"],
   "rules": {
-    "subject-case": [
-      1,
-      "always",
-      [
-        "lower-case",
-        "camel-case",
-        "kebab-case",
-        "pascal-case",
-        "sentence-case",
-        "snake-case",
-        "start-case"
-      ]
-    ],
+    "type-case": [2, "always", ["lower-case", "upper-case"]],
     "type-enum": [
       2,
       "always",
@@ -29,7 +17,21 @@
         "style",
         "test",
         "hack",
-        "merge"
+        "merge",
+        "CI"
+      ]
+    ],
+    "subject-case": [
+      1,
+      "always",
+      [
+        "lower-case",
+        "camel-case",
+        "kebab-case",
+        "pascal-case",
+        "sentence-case",
+        "snake-case",
+        "start-case"
       ]
     ]
   }
