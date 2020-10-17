@@ -1,32 +1,37 @@
 import React, { useEffect } from 'react'
-
 import { Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { RootState } from '../../store'
 import { setPending, setInvalid, Status, setValid } from '../../store/status'
 import { setData } from '../../store/userInfo'
 
 import View, { MainSkleton } from './view'
 
-import { useDispatch, useSelector } from 'react-redux'
 import { loadData } from '../../api'
-
-import { RootState } from '../../store'
 
 const selector = ({ result, userInfo }: RootState) => ({ result, userInfo })
 
-export default () => {
+export default function Main() {
   const dispatch = useDispatch()
   const { result, userInfo } = useSelector(selector)
-  const loading = async () => {
-    const fetched = await fetching()
-    if (fetched) dispatch(setData(fetched))
-    else dispatch(setInvalid())
+
+  const fetching = async () => {
+    try {
+      const { data } = await loadData()
+      dispatch(setData(data))
+    } catch {
+      dispatch(setInvalid())
+    }
   }
 
   useEffect(() => {
     dispatch(setPending())
-    if (!userInfo) loading()
-    else dispatch(setValid())
+    if (!userInfo) {
+      fetching()
+    } else {
+      dispatch(setValid())
+    }
     // eslint-disable-next-line
   }, [userInfo])
 
@@ -39,13 +44,5 @@ export default () => {
       return <View data={userInfo} />
     default:
       return <div>알 수 없는 오류</div>
-  }
-}
-
-const fetching = async () => {
-  try {
-    return (await loadData()).data
-  } catch (e) {
-    return false
   }
 }
