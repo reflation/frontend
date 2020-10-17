@@ -8,7 +8,7 @@
 
 ## Type Check Status
 
-[![CircleCI](https://circleci.com/gh/reflation/frontend.svg?style=svg)](https://circleci.com/gh/reflation/frontend)
+![CI](https://github.com/reflation/frontend/workflows/CI/badge.svg)
 
 ## License
 
