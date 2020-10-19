@@ -40,8 +40,8 @@ const Tr = styled.tr`
   }
 `
 
-export default ({ subjects }: { subjects: Subject[] }) => (
-  <Table>
+const Table = ({ subjects }: { subjects: Subject[] }) => (
+  <Container>
     <Thead>
       <tr>
         <Th>성적</Th>
@@ -60,5 +60,7 @@ export default ({ subjects }: { subjects: Subject[] }) => (
         </Tr>
       ))}
     </tbody>
-  </Table>
+  </Container>
 )
+
+export default Table

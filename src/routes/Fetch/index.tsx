@@ -28,7 +28,7 @@ enum Result {
   unknown = '알 수 없는 오류',
 }
 
-export default () => {
+const Fetch = () => {
   const { result } = useSelector(selector)
   switch (result) {
     case Status.pending:
@@ -41,6 +41,8 @@ export default () => {
       return <NotValid result={Result.unknown} />
   }
 }
+
+export default Fetch
 
 const View = () => {
   const dispatch = useDispatch()
