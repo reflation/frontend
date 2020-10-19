@@ -23,19 +23,19 @@ export const Skeleton = styled(SkeletonPulse)`
   }
 `
 
-export const SkletonCircle = styled(Skeleton)`
+export const SkeletonCircle = styled(Skeleton)`
   width: 170px;
   height: 170px;
   border-radius: 50%;
 `
 
-export const SkletonLineChart = styled(Skeleton)`
+export const SkeletonLineChart = styled(Skeleton)`
   width: 100%;
   height: 150px;
   border-radius: 5px;
 `
 
-export const SkletonTable = styled(Skeleton)`
+export const SkeletonTable = styled(Skeleton)`
   width: 100%;
   height: 122px;
 `

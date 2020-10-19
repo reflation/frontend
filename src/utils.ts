@@ -11,10 +11,10 @@ const reduce = (pre: number, curr: number) => pre + curr
 
 const sumArray = (arr: number[]) => arr.reduce(reduce)
 
-export type PostProcessor = ReturnType<typeof postProcesser>
+export type PostProcessor = ReturnType<typeof postProcessor>
 
-export const postProcesser = ({ name, semesters, averagePoint }: User) => {
-  const creadit = semesters
+export const postProcessor = ({ name, semesters, averagePoint }: User) => {
+  const credit = semesters
     .map(semester => semester.totalCredit)
     .reduce((acc: number, curr: number) => acc + curr)
 
@@ -44,7 +44,7 @@ export const postProcesser = ({ name, semesters, averagePoint }: User) => {
   )
 
   return {
-    creadit,
+    credit,
     gradeRate,
     gradeRateAverages,
     semesterNames,

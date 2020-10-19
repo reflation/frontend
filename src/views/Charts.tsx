@@ -3,7 +3,7 @@ import { primary, darken_lite, black, darken_normal } from '../styles/colors'
 import MinimalChart from 'react-minimal-pie-chart'
 
 import ApexChart from 'react-apexcharts'
-import { MAX_GPA, TYPE_MAX_GPA, TYPE_REQUIRE_CREADIT } from '../varables'
+import { MAX_GPA, TYPE_MAX_GPA, TYPE_REQUIRE_CREDIT } from '../variables'
 
 type DonutProps =
   | {
@@ -14,7 +14,7 @@ type DonutProps =
   | {
       title: '취득학점'
       value: number
-      totalValue: TYPE_REQUIRE_CREADIT
+      totalValue: TYPE_REQUIRE_CREDIT
     }
 
 const DonutStyle = { width: '170px', marginBottom: '1em' }

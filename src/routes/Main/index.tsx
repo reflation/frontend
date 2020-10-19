@@ -8,7 +8,7 @@ import { RootState } from '../../store'
 import { setPending, setInvalid, Status, setValid } from '../../store/status'
 import { setData } from '../../store/userInfo'
 
-import View, { MainSkleton } from './view'
+import View, { MainSkeleton } from './view'
 
 import { loadData } from '../../api'
 
@@ -44,7 +44,7 @@ export default function Main() {
 
   switch (result) {
     case Status.pending:
-      return <MainSkleton />
+      return <MainSkeleton />
     case Status.invalid:
       return <Redirect to="/login" />
     case Status.valid:

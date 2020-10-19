@@ -12,17 +12,17 @@ import { User } from '../../types/models'
 import { FlexBox } from '../../styles'
 import { mainBoxShadow, white } from '../../styles/colors'
 
-import { postProcesser } from '../../utils'
-import { MAX_GPA, REQUIRE_CREADIT } from '../../varables'
+import { postProcessor } from '../../utils'
+import { MAX_GPA, REQUIRE_CREDIT } from '../../variables'
 
 import { DonutChart, LineChart, PieChart } from '../../views/Charts'
 import { Li, Ul } from '../../views/LeftNav'
 
 import {
-  SkletonCircle,
-  SkletonLineChart,
-  SkletonTable,
-} from '../../views/Skleton'
+  SkeletonCircle,
+  SkeletonLineChart,
+  SkeletonTable,
+} from '../../views/Skeleton'
 
 import Table from '../../views/Table'
 import { Regular } from '../../views/Text'
@@ -62,12 +62,12 @@ const selector = ({ semesterIndex }: RootState) => ({ semesterIndex })
 export default ({ data }: Data) => {
   const {
     averagePoint,
-    creadit,
+    credit,
     gradeRate,
     gradeRateAverages,
     semesterNames,
     semesterNamesWithOutside,
-  } = postProcesser(data)
+  } = postProcessor(data)
 
   const { semesterIndex } = useSelector(selector)
 
@@ -87,8 +87,8 @@ export default ({ data }: Data) => {
           <div style={{ marginLeft: '2em' }}>
             <DonutChart
               title={'취득학점'}
-              value={creadit}
-              totalValue={REQUIRE_CREADIT}
+              value={credit}
+              totalValue={REQUIRE_CREDIT}
             />
           </div>
           <PieChart labels={[...gradeRangeAToC, 'D 이하']} series={gradeRate} />
@@ -103,17 +103,17 @@ export default ({ data }: Data) => {
   )
 }
 
-export const MainSkleton = () => (
+export const MainSkeleton = () => (
   <Content>
     <CircleChartWrap>
-      <SkletonCircle />
-      <SkletonCircle />
-      <SkletonCircle />
+      <SkeletonCircle />
+      <SkeletonCircle />
+      <SkeletonCircle />
     </CircleChartWrap>
     <FlexBoxColumn>
-      <SkletonLineChart />
+      <SkeletonLineChart />
     </FlexBoxColumn>
-    <SkletonTable />
+    <SkeletonTable />
   </Content>
 )
 

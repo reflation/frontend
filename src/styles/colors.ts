@@ -16,7 +16,7 @@ export const valid = {
   inside: 'rgba(64, 169, 255, 0.65)',
 }
 
-export const invaild = {
+export const invalid = {
   outside: 'rgba(244, 179, 187, 0.65)',
   inside: 'rgba(229, 27, 52, 0.65)',
 }

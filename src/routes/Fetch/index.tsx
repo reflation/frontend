@@ -24,7 +24,7 @@ interface FormTarget extends TypeForm {
 }
 
 enum Result {
-  invaild = '입력한 정보가 유효하지 않습니다',
+  invalid = '입력한 정보가 유효하지 않습니다',
   unknown = '알 수 없는 오류',
 }
 
@@ -36,9 +36,9 @@ export default () => {
     case Status.valid:
       return <Redirect to="/main" />
     case Status.invalid:
-      return <NotVaild result={Result.invaild} />
+      return <NotValid result={Result.invalid} />
     default:
-      return <NotVaild result={Result.unknown} />
+      return <NotValid result={Result.unknown} />
   }
 }
 
@@ -68,13 +68,13 @@ const View = () => {
   )
 }
 
-const NotVaild = ({ result }: { result: Result }) => (
+const NotValid = ({ result }: { result: Result }) => (
   <Root>
     <Box>
       <TitleCenter as="h2">{result}</TitleCenter>
     </Box>
     <Redirect
-      to={`/fetch?${result === Result.invaild ? 'invaild' : 'unknown'}`}
+      to={`/fetch?${result === Result.invalid ? 'invalid' : 'unknown'}`}
     />
   </Root>
 )
