@@ -1,10 +1,10 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { cellBackground } from '../styles/colors'
 import { Subject } from '../types/models'
 import { GradeNum } from '../types/dreamy'
 
-const Table = styled.table`
+const Container = styled.table`
   align-self: center;
 `
 
@@ -13,10 +13,10 @@ const Thead = styled.thead`
   height: 54px;
 `
 
-const Cell = `
-padding-left: 26px;
-padding-right: 26px;
-vertical-align: middle;
+const Cell = css`
+  padding-left: 26px;
+  padding-right: 26px;
+  vertical-align: middle;
 `
 
 const Th = styled.th`
