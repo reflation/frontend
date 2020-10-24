@@ -124,6 +124,8 @@ const Root = styled(FlexBox)`
   flex-direction: row;
   padding-top: 24px;
   padding-bottom: 24px;
+  width: 1140px;
+  height: 768px;
 `
 
 const RegularMarginLeft = styled(Regular)`
@@ -137,14 +139,13 @@ const Content = styled(FlexBox)`
   border-radius: 16px;
   margin-top: 22px;
   flex-direction: column;
-  padding-top: 28px;
-  padding-left: 10%;
-  padding-right: 10%;
+  width: 100%;
+  margin: 0 43px;
 `
 
 const CircleChartWrap = styled(FlexBox)`
   justify-content: space-around;
-  margin-bottom: 92px;
+  margin: 0 80px 80px 80px;
 `
 
 const FlexBoxColumn = styled(FlexBox)`
