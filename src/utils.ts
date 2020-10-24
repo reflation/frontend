@@ -1,11 +1,24 @@
 import { User, SemesterEnglish2Korean } from './types/models'
 import { gradeRangeAToC } from './types/dreamy'
 
-export const saveToken = (token: string) => localStorage.setItem('token', token)
+import qs from 'simple-query-string'
 
 export const tokenDelete = () => localStorage.removeItem('token')
 
 export const getToken = () => localStorage.getItem('token')
+
+export function handleToken() {
+  const token = getToken()
+  if (token) return token
+
+  const { token: parsedToken } = qs.parse(window.location.search)
+
+  if (typeof parsedToken !== 'string')
+    throw Error('토큰 정보가 문자열 타입으로 구문분석 되지 않았습니다.')
+
+  localStorage.setItem('token', parsedToken)
+  return parsedToken
+}
 
 const reduce = (pre: number, curr: number) => pre + curr
 

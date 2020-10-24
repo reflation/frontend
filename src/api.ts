@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { User, UserNoPw } from './types/models'
 import { getToken } from './utils'
 
@@ -28,9 +28,9 @@ export const savePointToServer = async (data: UserNoPw) =>
     },
   })).status === 201
 
-export const loadData = (): Promise<AxiosResponse<User>> =>
-  request.get('load', {
+export const loadData = (token: string) =>
+  request.get<User>('load', {
     headers: {
-      Authorization: `Bearer ${getToken()}`,
+      Authorization: `Bearer ${token}`,
     },
   })
