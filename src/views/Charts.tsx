@@ -1,9 +1,12 @@
-import React from 'react'
-import { primary, darken_lite, black, darken_normal } from '../styles/colors'
-import MinimalChart from 'react-minimal-pie-chart'
+import React, { useCallback, useState } from 'react'
 
+import MinimalChart, { PieChartData } from 'react-minimal-pie-chart'
 import ApexChart from 'react-apexcharts'
+
+import ReactTooltip from 'react-tooltip'
+
 import { MAX_GPA, TYPE_MAX_GPA, TYPE_REQUIRE_CREDIT } from '../variables'
+import { primary, darken_lite, black, darken_normal } from '../styles/colors'
 
 type DonutProps =
   | {
@@ -17,7 +20,7 @@ type DonutProps =
       totalValue: TYPE_REQUIRE_CREDIT
     }
 
-const DonutStyle = { width: '170px', marginBottom: '1em' }
+const PieStyle = { width: '170px' }
 
 export const DonutChart = ({ title, value, totalValue }: DonutProps) => {
   const isGPA = title === '평점'
@@ -60,7 +63,7 @@ export const DonutChart = ({ title, value, totalValue }: DonutProps) => {
         fontSize: '21px',
         fill: black,
       }}
-      style={DonutStyle}
+      style={PieStyle}
     />
   )
 }
@@ -115,27 +118,39 @@ export const LineChart = ({ categories, series }: LineChartProps) => {
   )
 }
 
-type PieChartProps = {
-  labels: string[]
-  series: number[]
+interface PieChartProps {
+  data: PieChartData[]
 }
 
-const pieOption = {
-  responsive: [
-    {
-      breakpoint: 200,
-    },
-  ],
-  legend: {
-    show: false,
-  },
+const labelStyle = {
+  fontSize: '5px',
+  fontFamily: 'sans-serif',
 }
 
-export const PieChart = ({ labels, series }: PieChartProps) => (
-  <ApexChart
-    options={{ ...pieOption, labels }}
-    series={series}
-    type="pie"
-    width={240}
-  />
-)
+function makeTooltipContent(entry: PieChartData) {
+  return `${entry.title}: ${entry.value} 개`
+}
+
+export const PieChart = ({ data }: PieChartProps) => {
+  const [hovered, setHoverd] = useState<number | null>(null)
+  const tooltipCallback = useCallback(
+    () => typeof hovered === 'number' && makeTooltipContent(data[hovered]),
+    [data, hovered]
+  )
+  return (
+    <div data-tip="" data-for="chart">
+      <MinimalChart
+        data={data}
+        style={PieStyle}
+        animate
+        startAngle={-90}
+        labelStyle={labelStyle}
+        onMouseOver={(_, __, index) => {
+          setHoverd(index)
+        }}
+        onMouseOut={() => setHoverd(null)}
+      />
+      <ReactTooltip id="chart" getContent={tooltipCallback} />
+    </div>
+  )
+}

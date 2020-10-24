@@ -26,7 +26,6 @@ import {
 
 import Table from '../../views/Table'
 import { Regular } from '../../views/Text'
-import { gradeRangeAToC } from '../../types/dreamy'
 
 type Data = { data: User }
 
@@ -59,7 +58,7 @@ const LeftNav = ({
 
 const selector = ({ semesterIndex }: RootState) => ({ semesterIndex })
 
-export default ({ data }: Data) => {
+export default function View({ data }: Data) {
   const {
     averagePoint,
     credit,
@@ -84,14 +83,12 @@ export default ({ data }: Data) => {
             value={averagePoint}
             totalValue={MAX_GPA}
           />
-          <div style={{ marginLeft: '2em' }}>
-            <DonutChart
-              title={'취득학점'}
-              value={credit}
-              totalValue={REQUIRE_CREDIT}
-            />
-          </div>
-          <PieChart labels={[...gradeRangeAToC, 'D 이하']} series={gradeRate} />
+          <DonutChart
+            title={'취득학점'}
+            value={credit}
+            totalValue={REQUIRE_CREDIT}
+          />
+          <PieChart data={gradeRate} />
         </CircleChartWrap>
         <FlexBoxColumn>
           <RegularMarginLeft>학기별 학점 현황</RegularMarginLeft>
