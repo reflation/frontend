@@ -46,6 +46,7 @@ const LeftNav = ({
     <Ul>
       {semesters.map((semester, index) => (
         <ClickableLi
+          key={semester}
           isSelect={selectedIndex === index}
           onClick={() => dispatch(setSemesterIndex(index))}
         >

@@ -52,7 +52,7 @@ export default ({ subjects }: { subjects: Subject[] }) => (
     </Thead>
     <tbody>
       {subjects.map(({ grade, title, course }) => (
-        <Tr>
+        <Tr key={title}>
           <Td>{grade}</Td>
           <Td>{GradeNum[grade]}</Td>
           <Td align="left">{title}</Td>
