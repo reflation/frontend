@@ -12,21 +12,20 @@ import { User } from '../../types/models'
 import { FlexBox } from '../../styles'
 import { mainBoxShadow, white } from '../../styles/colors'
 
-import { postProcesser } from '../../utils'
-import { MAX_GPA, REQUIRE_CREADIT } from '../../varables'
+import { postProcessor } from '../../utils'
+import { MAX_GPA, REQUIRE_CREDIT } from '../../variables'
 
 import { DonutChart, LineChart, PieChart } from '../../views/Charts'
 import { Li, Ul } from '../../views/LeftNav'
 
 import {
-  SkletonCircle,
-  SkletonLineChart,
-  SkletonTable,
-} from '../../views/Skleton'
+  SkeletonCircle,
+  SkeletonLineChart,
+  SkeletonTable,
+} from '../../views/Skeleton'
 
 import Table from '../../views/Table'
 import { Regular } from '../../views/Text'
-import { gradeRangeAToC } from '../../types/dreamy'
 
 type Data = { data: User }
 
@@ -46,6 +45,7 @@ const LeftNav = ({
     <Ul>
       {semesters.map((semester, index) => (
         <ClickableLi
+          key={semester}
           isSelect={selectedIndex === index}
           onClick={() => dispatch(setSemesterIndex(index))}
         >
@@ -58,15 +58,15 @@ const LeftNav = ({
 
 const selector = ({ semesterIndex }: RootState) => ({ semesterIndex })
 
-export default ({ data }: Data) => {
+export default function View({ data }: Data) {
   const {
     averagePoint,
-    creadit,
+    credit,
     gradeRate,
     gradeRateAverages,
     semesterNames,
     semesterNamesWithOutside,
-  } = postProcesser(data)
+  } = postProcessor(data)
 
   const { semesterIndex } = useSelector(selector)
 
@@ -83,14 +83,12 @@ export default ({ data }: Data) => {
             value={averagePoint}
             totalValue={MAX_GPA}
           />
-          <div style={{ marginLeft: '2em' }}>
-            <DonutChart
-              title={'취득학점'}
-              value={creadit}
-              totalValue={REQUIRE_CREADIT}
-            />
-          </div>
-          <PieChart labels={[...gradeRangeAToC, 'D 이하']} series={gradeRate} />
+          <DonutChart
+            title={'취득학점'}
+            value={credit}
+            totalValue={REQUIRE_CREDIT}
+          />
+          <PieChart data={gradeRate} />
         </CircleChartWrap>
         <FlexBoxColumn>
           <RegularMarginLeft>학기별 학점 현황</RegularMarginLeft>
@@ -102,17 +100,17 @@ export default ({ data }: Data) => {
   )
 }
 
-export const MainSkleton = () => (
+export const MainSkeleton = () => (
   <Content>
     <CircleChartWrap>
-      <SkletonCircle />
-      <SkletonCircle />
-      <SkletonCircle />
+      <SkeletonCircle />
+      <SkeletonCircle />
+      <SkeletonCircle />
     </CircleChartWrap>
     <FlexBoxColumn>
-      <SkletonLineChart />
+      <SkeletonLineChart />
     </FlexBoxColumn>
-    <SkletonTable />
+    <SkeletonTable />
   </Content>
 )
 
@@ -126,6 +124,8 @@ const Root = styled(FlexBox)`
   flex-direction: row;
   padding-top: 24px;
   padding-bottom: 24px;
+  width: 1140px;
+  height: 768px;
 `
 
 const RegularMarginLeft = styled(Regular)`
@@ -139,14 +139,13 @@ const Content = styled(FlexBox)`
   border-radius: 16px;
   margin-top: 22px;
   flex-direction: column;
-  padding-top: 28px;
-  padding-left: 10%;
-  padding-right: 10%;
+  width: 100%;
+  margin: 0 43px;
 `
 
 const CircleChartWrap = styled(FlexBox)`
   justify-content: space-around;
-  margin-bottom: 92px;
+  margin: 0 80px 80px 80px;
 `
 
 const FlexBoxColumn = styled(FlexBox)`

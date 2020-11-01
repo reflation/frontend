@@ -21,8 +21,8 @@ export type Actions = {
 const title = 'result'
 
 export const setPending = createAction(`${title}/pending`)
-export const setValid = createAction(`${title}/vaild`)
-export const setInvalid = createAction(`${title}/invaild`)
+export const setValid = createAction(`${title}/valid`)
+export const setInvalid = createAction(`${title}/invalid`)
 
 const initialState = Status.pending
 

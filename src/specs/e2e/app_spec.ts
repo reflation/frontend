@@ -1,13 +1,13 @@
 Feature('Input username: Request login token')
 
-Scenario(`type vaild username in '/'`, I => {
+Scenario(`type valid username in '/'`, I => {
   I.amOnPage('/login')
   I.fillField({ name: 'mailid' }, 'muhun')
   I.pressKey('Enter')
   I.see('mail was send', 'p#result')
 })
 
-Scenario(`type inVaild username in '/'`, I => {
+Scenario(`type inValid username in '/'`, I => {
   I.amOnPage('/login')
   I.fillField({ name: 'mailid' }, 'muhunkim')
   I.pressKey('Enter')
@@ -16,7 +16,7 @@ Scenario(`type inVaild username in '/'`, I => {
 
 Feature('load user data in /main with auth token')
 
-Scenario(`send invaild token, show 'This address is not valid'`, I => {
+Scenario(`send invalid token, show 'This address is not valid'`, I => {
   const token = 'INVALD'
   I.amOnPage(`/main&token=${token}`)
   I.see('This address is not valid', 'p#result')

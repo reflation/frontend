@@ -34,21 +34,6 @@ export type GradePoint =
   | 'D-'
   | 'F'
 
-export const gradeRangeAToC = [
-  'A+',
-  'A0',
-  'A',
-  'A-',
-  'B+',
-  'B0',
-  'B',
-  'B-',
-  'C+',
-  'C0',
-  'C',
-  'C-',
-] as const
-
 export enum GradeNum {
   'A+' = 4.3,
   'A0' = 4.0,

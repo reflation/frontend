@@ -1,20 +1,28 @@
 import { User, SemesterEnglish2Korean } from './types/models'
-import { gradeRangeAToC } from './types/dreamy'
+import { GradePoint } from './types/dreamy'
 
-export const saveToken = (token: string) => localStorage.setItem('token', token)
+import qs from 'simple-query-string'
+import { PieChartData } from 'react-minimal-pie-chart'
 
 export const tokenDelete = () => localStorage.removeItem('token')
 
 export const getToken = () => localStorage.getItem('token')
 
-const reduce = (pre: number, curr: number) => pre + curr
+export function handleToken() {
+  const token = getToken()
+  if (token) return token
 
-const sumArray = (arr: number[]) => arr.reduce(reduce)
+  const { token: parsedToken } = qs.parse(window.location.search)
 
-export type PostProcessor = ReturnType<typeof postProcesser>
+  if (typeof parsedToken !== 'string')
+    throw Error('토큰 정보가 문자열 타입으로 구문분석 되지 않았습니다.')
 
-export const postProcesser = ({ name, semesters, averagePoint }: User) => {
-  const creadit = semesters
+  localStorage.setItem('token', parsedToken)
+  return parsedToken
+}
+
+export const postProcessor = ({ name, semesters, averagePoint }: User) => {
+  const credit = semesters
     .map(semester => semester.totalCredit)
     .reduce((acc: number, curr: number) => acc + curr)
 
@@ -22,11 +30,18 @@ export const postProcesser = ({ name, semesters, averagePoint }: User) => {
     .map(({ subjects }) => subjects.map(({ grade }) => grade))
     .flat()
 
-  const series = gradeRangeAToC.map(
-    grade => gradePoint.filter(point => point === grade).length
-  )
-
-  const gradeRate = [...series, gradePoint.length - sumArray(series)]
+  const gradeRate: PieChartData[] = [
+    ...gradeRange.map(({ title, color }) => ({
+      title,
+      color,
+      value: gradePoint.filter(point => point === title).length,
+    })),
+    {
+      title: 'D 이하',
+      color: '#B76935',
+      value: gradePoint.filter(point => underDPoints.includes(point)).length,
+    },
+  ]
 
   const semesterOmitOutside = semesters.filter(({ isOutside }) => !isOutside)
 
@@ -44,7 +59,7 @@ export const postProcesser = ({ name, semesters, averagePoint }: User) => {
   )
 
   return {
-    creadit,
+    credit,
     gradeRate,
     gradeRateAverages,
     semesterNames,
@@ -52,3 +67,22 @@ export const postProcesser = ({ name, semesters, averagePoint }: User) => {
     semesterNamesWithOutside,
   }
 }
+
+interface GradeRange {
+  title: GradePoint
+  color: string
+}
+
+const underDPoints: GradePoint[] = ['D+', 'D0', 'D-', 'F']
+
+const gradeRange: GradeRange[] = [
+  { title: 'A+', color: '#143642' },
+  { title: 'A0', color: '#263C41' },
+  { title: 'A-', color: '#38413F' },
+  { title: 'B+', color: '#4A473E' },
+  { title: 'B0', color: '#5C4D3C' },
+  { title: 'B-', color: '#6F523B' },
+  { title: 'C+', color: '#815839' },
+  { title: 'C0', color: '#935E38' },
+  { title: 'C-', color: '#A56336' },
+]

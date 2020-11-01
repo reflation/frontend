@@ -1,4 +1,13 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const pulse = keyframes`
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: -135% 0%;
+  }
+`
 
 const SkeletonPulse = styled.div`
   display: inline-block;
@@ -6,15 +15,7 @@ const SkeletonPulse = styled.div`
   width: 100%;
   background: linear-gradient(-90deg, #f0f0f0 0%, #f8f8f8 50%, #f0f0f0 100%);
   background-size: 400% 400%;
-  animation: pulse 1.2s ease-in-out infinite;
-  @keyframes pulse {
-    0% {
-      background-position: 0% 0%;
-    }
-    100% {
-      background-position: -135% 0%;
-    }
-  }
+  animation: ${pulse} 1.2s ease-in-out infinite;
 `
 
 export const Skeleton = styled(SkeletonPulse)`
@@ -23,19 +24,19 @@ export const Skeleton = styled(SkeletonPulse)`
   }
 `
 
-export const SkletonCircle = styled(Skeleton)`
+export const SkeletonCircle = styled(Skeleton)`
   width: 170px;
   height: 170px;
   border-radius: 50%;
 `
 
-export const SkletonLineChart = styled(Skeleton)`
+export const SkeletonLineChart = styled(Skeleton)`
   width: 100%;
   height: 150px;
   border-radius: 5px;
 `
 
-export const SkletonTable = styled(Skeleton)`
+export const SkeletonTable = styled(Skeleton)`
   width: 100%;
   height: 122px;
 `
